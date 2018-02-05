@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pruebas Arbol</title>
+    <script src="./TCamara.js"></script>
+    <script src="./TEntidad.js"></script>
+    <script src="./TLuz.js"></script>
+    <script src="./TMalla.js"></script>
+    <script src="./TNodo.js"></script>
+    <script src="./TTransform.js"></script>
+    <script type="text/javascript">
+      var padre = new TNodo();
+      console.log('soy el padre');
+      console.log(padre);
+      var hijo = new TNodo(padre);
+      console.log('soy el hijo');
+      console.log(hijo);
+      console.log('soy el padre');
+      console.log(padre);
+      console.log('soy el hijo del hijo -> hijo1');
+      var hijo1 = new TNodo(hijo);
+      console.log(hijo1);
+      console.log('borrando hijo del padre principal');
+      console.log('soy el padre - Antes de borrar');
+      console.log(padre);
+      padre.remHijo();
+      console.log('soy el padre - Después de borrar');
+      console.log(padre);
+      console.log('soy el hijo');
+      console.log(hijo);
+    </script>
+  </head>
+  <body>
+    <p>Holiii!</p>
+  </body>
+</html>
