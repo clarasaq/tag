@@ -1,18 +1,11 @@
 // foo instanceof TNodo -> para saber de que tipo es foo
 class TNodo {
-  // constructor() {
-  //   // this.entidad = new TEntidad;
-  //   this.entidad = new TEntidad;
-  //   this.hijos = new Array;
-  //   this.padre = new TNodo;
-  //   this.padre = null;
-  // }
 
-  constructor(padre) {
-    this.entidad = new TEntidad;
-    this.hijos = new Array;
+  constructor(nombre, padre) {
+    this.entidad = null;
+    this.hijos = new Array();
+    this.nombre = nombre;
     if(padre !== undefined){
-      this.padre = new TNodo;
       this.padre = padre;
       this.padre.addHijo(this);
     }
@@ -23,32 +16,27 @@ class TNodo {
     //tenemos que apuntar al padre
   }
 
-  remHijos(){
+  removeHijos(){
     for(let i=0; i<this.hijos.length; i++){
-      this.hijos[i].remHijos();
+      this.hijos[i].removeHijos();
       this.hijos[i] = 0;
     }
-    delete this.hijos;
+    this.hijos.length = 0;
   }
 
-  remHijo(hijo){
-    //buscar la posicion del hijo que queremos borrar y luego:
-    //this.hijo.splice(pos, cantidad);
-    let pos;
-
+  removeHijo(hijo){
     for(let i=0; i<this.hijos.length; i++){
       if(this.hijos[i] === hijo){
-        pos = i;
+        this.hijos[i].removeHijos();
+        this.hijos.splice(i, 1);
+
+        return;
       }
     }
-    
-    //borrar tmb hijos del hijo
-    // this.padre.remHijos();
-    this.hijos.splice(pos, 1);
   }
 
   setEntidad(entidad){
-    //bool
+    this.entidad = entidad;
   }
 
   getEntidad(){
@@ -60,10 +48,20 @@ class TNodo {
   }
 
   draw(){
-    this.entidad.beginDraw();
-    for(let i = 0; i<this.hijos; i++){
+    console.log(this.nombre + " beginDraw");
+
+    if(this.entidad != null){
+      this.entidad.beginDraw();
+    }
+
+    for(let i = 0; i<this.hijos.length; i++){
       this.hijos[i].draw();
     }
-    this.entidad.endDraw();
+
+    if(this.entidad != null){
+      this.entidad.endDraw();
+    }
+
+    console.log(this.nombre + " endDraw");
   }
 }
