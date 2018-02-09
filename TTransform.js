@@ -12,18 +12,11 @@ class TTransform extends TEntidad{
   cargar(matriz){}
 
   trasladar(tx, ty, tz){
-    // Matrix x Vertex = TransformedVertex
-    console.log(tx + "," + ty + "," + tz)
-    let vertex = vec4.create(tx, ty, tz);
-    let newMatrix = vec4.create(this.matrix*vertex);
 
-    console.log(this.matrix);
-    return newMatrix;
   }
 
   rotar(rx, ry, rz, rw){
-    let myRotationAxis = vec3.create(rx, ry, rz);
-    this.rotate(rw, myRotationAxis);
+    
   }
 
   beginDraw(){
