@@ -6,8 +6,8 @@ class Main {
     var Escena = new TNodo("Escena");
 
     var RotaLuz = new TNodo("RotaLuz", Escena);
-    var RotaCam = new TNodo("RotaLuz", Escena);
-    var RotaCoche = new TNodo("RotaLuz", Escena);
+    var RotaCam = new TNodo("RotaCam", Escena);
+    var RotaCoche = new TNodo("RotaCoche", Escena);
 
     var TranslaLuz = new TNodo("TranslaLuz", RotaLuz);
 
