@@ -8,12 +8,12 @@ class TCamara extends TEntidad {
 	}
 	//TODO
 	setPerspectiva (float, float){
-		this.p=true;
+		this.esPrespectiva=true;
 
 	}
 	//TODO
 	setParalela (float, float){
-		this.p=false;
+		this.esPrespectiva=false;
 	}
 	beginDraw(){
     	console.log("Apilamos nombre: " + this.nombre);
