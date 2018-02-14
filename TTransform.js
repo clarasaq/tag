@@ -3,8 +3,11 @@ class TTransform extends TEntidad{
     super();
     // matriz = new TMatriz4x4;
     // matriz[4][4] = null;
+    // var glm = require('./glm');
     this.matrix = mat4.create();
     this.id = id;
+    console.log(this.matrix);
+    console.log('id=',this.id);
   }
 
   identidad(){}
@@ -16,7 +19,16 @@ class TTransform extends TEntidad{
   }
 
   rotar(rx, ry, rz, rw){
-    
+
+  }
+  escalar(ex, ey){
+
+  }
+  trasponer(){
+
+  }
+  invertir(){
+
   }
 
   beginDraw(){
