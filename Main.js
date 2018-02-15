@@ -9,35 +9,39 @@ class Main {
     var RotaCam = new TNodo("RotaCam", Escena);
     var RotaCoche = new TNodo("RotaCoche", Escena);
 
-    var TranslaLuz = new TNodo("TranslaLuz", RotaLuz);
+    var TraslaLuz = new TNodo("TraslaLuz", RotaLuz);
 
     //---- Añadir las entidades a los nodos ----//
-    var TransfRotaLuz = new TTransform(1);
-    var TransfRotaCam = new TTransform(2);
-    var TransfRotaCoche = new TTransform(3);
+    var TransfRotaLuz = new TTransform('Rotaluz_matrix', 1, 2, 3, 4, 15, 6, 7, 8, 19, 10, 11, 12, 16, 14, 15, 16);
+    var TransfRotaCam = new TTransform('Rotacam_matrix', 1, 2, 3, 14, 5, 6, 7, 18, 9, 10, 11, 12, 13, 14, 8, 16);
+    var TransfRotaCoche = new TTransform('Rotacoche_matrix', 1, 2, 3, 11, 5, 6, 7, 10, 9, 10, 11, 22, 13, 14, 25, 16);
 
-    var TransfTraslaLuz = new TTransform(11);
+    var TransfTraslaLuz = new TTransform('Traslaluz_matrix', 1, 2, 5, 4, 5, 6, 7, 18, 9, 10, 11, 12, 23, 14, 15, 16);
+
 
     RotaLuz.setEntidad(TransfRotaLuz);
     RotaCam.setEntidad(TransfRotaCam);
     RotaCoche.setEntidad(TransfRotaCoche);
 
-    TranslaLuz.setEntidad(TransfTraslaLuz);
-
-    console.log(TransfRotaLuz.trasladar(1, 2, 3));
+    TraslaLuz.setEntidad(TransfTraslaLuz);
 
     //---- Pintamos el árbol ----//
     console.log("**************");
     Escena.draw();
 
+    //---- Ejmplo de uso de las Transformaciones ----//
+    //TransfRotaCam.identidad(TransfRotaCam.getMatrix());
+
+    TransfRotaCam.rotar(TransfRotaCam.getMatrix(),90, 1, 1, 1);
+
     Escena.removeHijo(RotaLuz);
 
-    console.log("**************");
+    console.log("************** Borrando hijos");
     Escena.draw();
 
     Escena.removeHijos();
 
-    console.log("**************");
+    console.log("************** Borrando escena");
     Escena.draw();
 
   }

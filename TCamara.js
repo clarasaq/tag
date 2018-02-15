@@ -1,4 +1,5 @@
 class TCamara extends TEntidad {
+
 	constructor(n,p){
 		super();
 		this.nombre=n;
@@ -7,12 +8,12 @@ class TCamara extends TEntidad {
 		this.lejano=null;//Float
 	}
 	//TODO
-	setPerspectiva (float, float){
+	setPerspectiva (float, float2){
 		this.esPrespectiva=true;
 
 	}
 	//TODO
-	setParalela (float, float){
+	setParalela (float, float2){
 		this.esPrespectiva=false;
 	}
 	beginDraw(){
