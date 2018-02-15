@@ -1,28 +1,49 @@
 class TCamara extends TEntidad {
 
-	constructor(n,p){
+	constructor(n){
 		super();
 		this.nombre=n;
-		this.esPrespectiva=p;//Bolean
+		this.esPrespectiva=false;//Boolean
 		this.cercano=null;//Float
 		this.lejano=null;//Float
 	}
-	//TODO
-	setPerspectiva (float, float2){
+
+	//fovy =>Angulo de vision en radianes
+	//aspect => Relacion de aspecto
+	setPerspectiva (near, far, fovy, aspect){
 		this.esPrespectiva=true;
+		let out= mat4.create();
+		mat4.perspective(out, fovy, aspect, near, far)
+		this.projectionMatrix = out;
+		this.cercano = near;
+		this.lejano = far;
 
 	}
-	//TODO
-	setParalela (float, float2){
+
+	//left, right y top ?????
+	setParalela (near, far left, right, top){
 		this.esPrespectiva=false;
+		let out= mat4.create();
+		mat4.ortho(out, left, right, bottom, top, near, far);
+		this.projectionMatrix = out;
+		this.cercano = near;
+		this.lejano = far;
+
 	}
+
+	//Para obtener la matriz de proyeccion
+	getProjectionMatrix(){
+		return this.projectionMatrix;
+	}
+	getTipo(){
+		return this.esPrespectiva;
+	}
+
 	beginDraw(){
-    	console.log("Apilamos nombre: " + this.nombre);
-    	this.stack.push(this.nombre);
+
 	}
 	endDraw(){
-		console.log("Desapilamos nombre: " + this.stack[this.stack.length-1]);
-	    this.stack.pop();
+
 	}
 
 }
