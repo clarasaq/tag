@@ -16,6 +16,9 @@ class TCamara extends TEntidad {
 	setParalela (float, float2){
 		this.esPrespectiva=false;
 	}
+
+	//los métodos beginDraw y endDraw de las cámaras y las luces suelen estar vacíos.
+//Es copy paste de las trasnparencias jeje
 	beginDraw(){
     	console.log("Apilamos nombre: " + this.nombre);
     	this.stack.push(this.nombre);

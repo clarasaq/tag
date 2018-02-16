@@ -1,4 +1,5 @@
 class TEntidad {
+  
   //clase virtual
   constructor(){
     this.stack = [];
@@ -8,9 +9,7 @@ class TEntidad {
 
   }
 
-  beginDraw(){
+  beginDraw();
 
-  }
-
-  endDraw(){}
+  endDraw();
 }
