@@ -1,0 +1,3 @@
+class TRecursoMalla extends TRecurso{
+  
+}
