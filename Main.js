@@ -19,20 +19,33 @@ class Main {
 
     var TransfTraslaLuz = new TTransform("Traslaluz_matrix", 1, 2, 5, 4, 5, 6, 7, 18, 9, 10, 11, 12, 23, 14, 15, 16);
 
-    var EntLuz = new TLuz("NLuz"/*, color*/);
+    // var EntLuz = new TLuz("NLuz"/*, color*/);
 
     RotaLuz.setEntidad(TransfRotaLuz);
     RotaCam.setEntidad(TransfRotaCam);
     RotaCoche.setEntidad(TransfRotaCoche);
 
     TraslaLuz.setEntidad(TransfTraslaLuz);
-    NLuz.setEntidad(EntLuz);
+    // NLuz.setEntidad(EntLuz);
 
 
     //---- Pintamos el árbol ----//
     console.log("**************");
     Escena.draw();
 
+    console.log("-----------------");
+    console.log("START RECURSOS");
+    //---- Gestor Recursos ----//
+    var gestorRecursos = new TGestorRecursos();
+
+    //---- Recurso ----//
+    var recursoMalla = gestorRecursos.getRecurso('1.png', 'malla');
+
+    //---- Recurso Malla ----//
+    recursoMalla.draw();
+
+    console.log("-----------------");
+    console.log("END RECURSOS");
     //---- Ejmplo de uso de las Transformaciones ----//
     //TransfRotaCam.identidad(TransfRotaCam.getMatrix());
 
