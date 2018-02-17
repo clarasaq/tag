@@ -1,9 +1,9 @@
 class TLuz extends TEntidad{
 
-  constructor(nombre/*, color*/){
+  constructor(nombre){
     super();
     this.nombre = nombre;
-    //this.intensidad = new TColor(color);
+    this.intensidad = new TColor();
   }
 
 
@@ -11,12 +11,11 @@ class TLuz extends TEntidad{
     this.intensidad = color;
   }
 
-
-  TColor getIntensidad (){
+  getIntensidad (){
     return this.intensidad;
   }
 
-
+  
+  beginDraw(){}
+  endDraw(){}
 }
-beginDraw();
-endDraw();
