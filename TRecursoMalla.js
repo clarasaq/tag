@@ -3,8 +3,10 @@ class TRecursoMalla extends TRecurso{
     super();
 
     this.vertices;
-    this.normales;
+    this.normales;  //Float32Array
     this.texturas;
+
+    this.indices;   //Uint16Array
 
     this.vertTriangulos;
     this.normTriangulos;
@@ -15,21 +17,25 @@ class TRecursoMalla extends TRecurso{
 
   cargarFichero(nombre){
     /*Parsear el fichero
-    require "json"
-    lines = File.open("filename.txt").read.split("}\n").join("},")+"}"
-    data = JSON.parse([lines].to_s)*/
-    console.log('Estamos en TRecursoMalla y cargamos el fichero: ' + nombre);
+    require "json"*/
+    console.log("Entramos en la carga de fichero de MALLA");
 
-    return;
+    let req = new XMLHttpRequest();
+    req.open('GET', nombre, false);
+    req.send();
 
-    let array = [];
-    let file = new File([array], nombre);
-    console.log(array);
-    console.log(file);
-    let lines = file.read.split("}\n").join("},")+"}";
-    let data = JSON.parse([lines].to_s);
+    if(req.status == 200){
+      let json = JSON.parse(req.response);
+      console.log(json);
 
-    console.log(data);
+      let normales = json.data.attributes.normal.array;
+      console.log(normales);
+      this.normales = normales;
+
+      let indices = json.data.index.array;
+      console.log(indices);
+      this.indices = indices;
+    }
   }
 
   initWebGL(canvas) {
@@ -65,14 +71,9 @@ class TRecursoMalla extends TRecurso{
     var gl = this.initWebGL(canvas);
     /*======== Defining and storing the geometry ===========*/
 
-     var vertices = [
-       -0.3, 0.3, 0.0,
-       -0.3, -0.3, 0.0,
-       0.3, -0.3, 0.0,
-       0.3, 0.3, 0.0
-     ];
+     var vertices = this.normales;
 
-     var indices = [0 ,1 ,2, 3];
+     var indices = this.indices;
 
      // Create an empty buffer object to store vertex buffer
      var vertex_buffer = gl.createBuffer();
