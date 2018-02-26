@@ -12,15 +12,12 @@ class Main {
     var TraslaLuz = new TNodo("TraslaLuz", RotaLuz);
     var NLuz = new TNodo("NLuz", TraslaLuz);
 
-    var TraslaCoche = new TNodo("TraslaCoche", RotaCoche);
-    var NMall = new TNodo("NMall", TraslaCoche);
-
     //---- Añadir las entidades a los nodos ----//
-    var TransfRotaLuz = new TTransform("Rotaluz_matrix", 1, 2, 3, 4, 15, 6, 7, 8, 19, 10, 11, 12, 16, 14, 15, 16);
-    var TransfRotaCam = new TTransform("Rotacam_matrix", 1, 2, 3, 14, 5, 6, 7, 18, 9, 10, 11, 12, 13, 14, 8, 16);
-    var TransfRotaCoche = new TTransform("Rotacoche_matrix", 1, 2, 3, 11, 5, 6, 7, 10, 9, 10, 11, 22, 13, 14, 25, 16);
+    var TransfRotaLuz = new TTransform("Rotaluz_matrix");
+    var TransfRotaCam = new TTransform("Rotacam_matrix");
+    var TransfRotaCoche = new TTransform("Rotacoche_matrix");
 
-    var TransfTraslaLuz = new TTransform("Traslaluz_matrix", 1, 2, 5, 4, 5, 6, 7, 18, 9, 10, 11, 12, 23, 14, 15, 16);
+    var TransfTraslaLuz = new TTransform("Traslaluz_matrix");
 
     var EntLuz = new TLuz("NLuz");
 
@@ -42,7 +39,7 @@ class Main {
     var gestorRecursos = new TGestorRecursos();
 
     //---- Recurso ----//
-    var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
+    var recursoMalla = gestorRecursos.getRecurso('1.png', 'malla');
 
     //---- Recurso Malla ----//
     recursoMalla.draw();
