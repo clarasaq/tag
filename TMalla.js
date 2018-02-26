@@ -4,6 +4,7 @@ class TMalla extends TEntidad{
     super();
     this.nombre = nombre;
     this.malla = null;
+    this.material = new TColor;
   }
 
   cargarMalla(m){

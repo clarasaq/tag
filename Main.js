@@ -12,6 +12,9 @@ class Main {
     var TraslaLuz = new TNodo("TraslaLuz", RotaLuz);
     var NLuz = new TNodo("NLuz", TraslaLuz);
 
+    var TraslaCoche = new TNodo("TraslaCoche", RotaCoche);
+    var NMall = new TNodo("NMall", TraslaCoche);
+
     //---- Añadir las entidades a los nodos ----//
     var TransfRotaLuz = new TTransform("Rotaluz_matrix", 1, 2, 3, 4, 15, 6, 7, 8, 19, 10, 11, 12, 16, 14, 15, 16);
     var TransfRotaCam = new TTransform("Rotacam_matrix", 1, 2, 3, 14, 5, 6, 7, 18, 9, 10, 11, 12, 13, 14, 8, 16);
