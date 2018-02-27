@@ -31,13 +31,17 @@ class Main {
     TraslaLuz.setEntidad(TransfTraslaLuz);
     NLuz.setEntidad(EntLuz);
 
-
     //---- Pintamos el árbol ----//
     console.log("**************");
+    //---- Transformacion ----//
+    console.log(" %%%%% Hago una transformación");
+
+    this.modelMatrix = TransfTraslaLuz.trasladar(3, 1, 4);
     Escena.draw();
 
     console.log("-----------------");
     console.log("START RECURSOS");
+
     //---- Gestor Recursos ----//
     var gestorRecursos = new TGestorRecursos();
 
@@ -50,12 +54,7 @@ class Main {
     console.log("-----------------");
     console.log("END RECURSOS");
 
-    //---- Transformacion ----//
-     //TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2);
-     // console.log(TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2));
-    // TransfRotaLuz.getMatrix();
-    //console.log("STACK");
-    //this.stack.draw();
+
 
 
     Escena.removeHijo(RotaLuz);
