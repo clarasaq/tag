@@ -42,7 +42,8 @@ class Main {
     var gestorRecursos = new TGestorRecursos();
 
     //---- Recurso ----//
-    var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
+    var recursoMalla = gestorRecursos.getRecurso('cube-mini.json', 'malla');
+    // var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
 
     //---- Recurso Malla ----//
     recursoMalla.draw();

@@ -15,7 +15,7 @@ class TLuz extends TEntidad{
     return this.intensidad;
   }
 
-  
+
   beginDraw(){}
   endDraw(){}
 }
