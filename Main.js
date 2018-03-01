@@ -15,6 +15,7 @@ class Main {
     var TraslaCoche = new TNodo("TraslaCoche", RotaCoche);
 
     var RotaMalla = new TNodo("RotaMalla", Escena);
+    var TraslaMalla = new TNodo("TraslaMalla", RotaMalla);
     var NMall = new TNodo("NMall", TraslaMalla);
 
 
