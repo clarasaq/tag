@@ -13,7 +13,10 @@ class Main {
     var NLuz = new TNodo("NLuz", TraslaLuz);
 
     var TraslaCoche = new TNodo("TraslaCoche", RotaCoche);
-    var NMall = new TNodo("NMall", TraslaCoche);
+
+    var RotaMalla = new TNodo("RotaMalla", Escena);
+    var TraslaMalla = new TNodo("TraslaMalla", RotaMalla);
+    var NMall = new TNodo("NMall", TraslaMalla);
 
     //---- Creamos la entidad ----//
     var TransfRotaLuz = new TTransform("Rotaluz_matrix");
@@ -32,31 +35,35 @@ class Main {
     TraslaLuz.setEntidad(TransfTraslaLuz);
     NLuz.setEntidad(EntLuz);
 
+    var EntMalla = new TMalla("EntMalla");
+    NMall.setEntidad(EntMalla);
+
+    NMall.entidad.cargarMalla("cube-mini.json");
+    /*NMall.entidad.beginDraw();*/ //No hace falta porque Escena.draw() ya llama a la funcion de beginDraw de TMalla
+    NMall.entidad.cargarMaterial("box.mtl");
+
     //---- Pintamos el árbol ----//
     console.log("**************");
-    //---- Transformacion ----//
-    console.log(" %%%%% Hago una transformación");
-
-    this.modelMatrix = TransfTraslaLuz.trasladar(3, 1, 4);
     Escena.draw();
 
     console.log("-----------------");
     console.log("START RECURSOS");
-
     //---- Gestor Recursos ----//
-    var gestorRecursos = new TGestorRecursos();
+    /*var gestorRecursos = new TGestorRecursos();
 
-    //---- Recurso ----//
-    var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
-
-    //---- Recurso Malla ----//
-    recursoMalla.draw();
+    var recursoMalla = gestorRecursos.getRecurso("cube-mini.json", "malla");
+    recursoMalla.draw();*/
 
     console.log("-----------------");
     console.log("END RECURSOS");
 
-
-
+    //---- Transformacion ----//
+     //TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2);
+     // console.log(TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2));
+    // TransfRotaLuz.getMatrix();
+    //console.log("STACK");
+    //this.stack.draw();
+/*
 
     Escena.removeHijo(RotaLuz);
 
@@ -66,7 +73,7 @@ class Main {
     Escena.removeHijos();
 
     console.log("************** Borrando escena");
-    Escena.draw();
+    Escena.draw();*/
 
   }
 }

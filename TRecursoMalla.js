@@ -28,6 +28,10 @@ class TRecursoMalla extends TRecurso{
       let json = JSON.parse(req.response);
       console.log(json);
 
+      let vertices = json.data.attributes.position.array;
+      console.log(vertices);
+      this.vertices = vertices;
+
       let normales = json.data.attributes.normal.array;
       console.log(normales);
       this.normales = normales;
@@ -71,7 +75,7 @@ class TRecursoMalla extends TRecurso{
     var gl = this.initWebGL(canvas);
     /*======== Defining and storing the geometry ===========*/
 
-     var vertices = this.normales;
+     var vertices = this.vertices;
 
      var indices = this.indices;
 
@@ -131,7 +135,7 @@ class TRecursoMalla extends TRecurso{
      /*=========Drawing the triangle===========*/
      gl.viewport(0,0,canvas.width,canvas.height);
      //gl.drawElements(Mode, Count, Type, Offset)
-     gl.drawElements(gl.TRIANGLE_FAN, indices.length, gl.UNSIGNED_SHORT,0);
+     gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
      // gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT,0);
 
   }

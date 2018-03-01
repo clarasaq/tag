@@ -3,22 +3,40 @@ class TMalla extends TEntidad{
   constructor(){
     super();
     this.malla = null;
+    this.material = null;
+
   }
 
   cargarMalla(m){
-    mallaRecurso = new TRecursoMalla();
-    console.log("Malla de TRecursoMalla creado");
-    mallaRecurso.cargarFichero(m);
-    console.log("mallaRecurso: " + mallaRecurso);
-    this.malla = mallaRecurso;
+
+    let gestor = new TGestorRecursos();
+    this.malla = gestor.getRecurso(m, "malla");
+/*
+    let mallagestor= new TRecursoMalla();
+    mallagestor.cargarFichero(m);
+    this.malla  = mallagestor;
+*/
+    // let mallaRecurso;
+    //
+    // mallaRecurso = new TRecursoMalla();
+    // console.log("Malla de TRecursoMalla creado");
+    // mallaRecurso.cargarFichero(m);
+    // console.log("mallaRecurso: " + mallaRecurso);
+    // this.malla = mallaRecurso;
+  }
+
+  cargarMaterial(mtl){
+    let gestormat = new TGestorRecursos();
+    this.material = gestormat.getRecurso(mtl, "material");
   }
 
   getMalla(){
-    return malla;
+    return this.malla;
   }
 
   beginDraw(){
-    malla.draw;
+    console.log("Model Matrix:" +this.modelMatrix);
+    this.malla.draw();
   }
 
   endDraw(){
