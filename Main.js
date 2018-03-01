@@ -41,7 +41,7 @@ class Main {
 
     NMall.entidad.cargarMalla("cube-mini.json");
     NMall.entidad.beginDraw();
-
+    NMall.entidad.cargarMaterial("box.mtl");
 
 
     //---- Pintamos el árbol ----//
@@ -54,13 +54,6 @@ class Main {
 
     console.log("-----------------");
     console.log("START RECURSOS");
-
-    //---- Gestor Recursos ----//
-    var gestorRecursos = new TGestorRecursos();
-
-    //---- Recurso ----//
-    var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
-    var recursoMaterial = gestorRecursos.getRecurso('box.mtl', 'material');
 
     //---- Recurso Malla ----//
     recursoMalla.draw();

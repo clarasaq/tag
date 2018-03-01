@@ -76,7 +76,7 @@ class TRecursoMalla extends TRecurso{
     /*======== Defining and storing the geometry ===========*/
 
      var vertices = this.vertices;
-     var vertices = this.normales;
+     //var vertices = this.normales;
 
      var indices = this.indices;
 

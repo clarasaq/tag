@@ -12,7 +12,6 @@ class TMalla extends TEntidad{
 
     let gestor = new TGestorRecursos();
     this.malla = gestor.getRecurso(m, "malla");
-    this.material = gestor.getRecurso(m)
 
     //
     // let mallaRecurso;
@@ -22,6 +21,11 @@ class TMalla extends TEntidad{
     // mallaRecurso.cargarFichero(m);
     // console.log("mallaRecurso: " + mallaRecurso);
     // this.malla = mallaRecurso;
+  }
+
+  cargarMaterial(mtl){
+    let gestor = new TGestorRecursos();
+    this.material = gestor.getRecurso(mtl, "material");
   }
 
   getMalla(){
