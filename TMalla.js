@@ -5,6 +5,7 @@ class TMalla extends TEntidad{
     this.nombre = nombre;
     this.malla = null;
     this.material = null;
+
   }
 
   cargarMalla(m){
