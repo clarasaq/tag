@@ -26,6 +26,7 @@ class TMalla extends TEntidad{
   }
 
   cargarMaterial(mtl){
+    console.log("Entro a cargarMaterial");
     let gestormat = new TGestorRecursos();
     this.material = gestormat.getRecurso(mtl, "material");
   }

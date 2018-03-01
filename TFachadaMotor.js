@@ -62,6 +62,15 @@ class TFachadaMotor {
     return malla;
   }
 
+  crearMaterial(nombre, fichero){
+    console.log("Crear material");
+    let nodo = new TNodo(nombre, this.escena);
+    let entMaterial = new TMalla();
+    nodo.setEntidad(entMaterial);
+    entMaterial.malla = this.gestor.getRecurso(fichero, "material");
+    return entMaterial;
+  }
+
   draw(){
     this.escena.draw();
   }
