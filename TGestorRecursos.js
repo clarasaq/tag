@@ -26,6 +26,7 @@ class TGestorRecursos{
       recurso.cargarFichero(nombre);
       this.recursos.push(recurso);
     }else if(tipo == "material"){
+      console.log("Enhorabuena, ha sido un material");
       recurso = new TRecursoMaterial();
       recurso.cargarFichero(nombre);
       this.recursos.push(recurso);

@@ -4,7 +4,7 @@ class TMalla extends TEntidad{
     super();
     this.nombre = nombre;
     this.malla = null;
-    this.material = new TColor;
+    this.material = null;
     console.log("caca");
   }
 
@@ -27,8 +27,8 @@ class TMalla extends TEntidad{
   }
 
   cargarMaterial(mtl){
-    let gestor = new TGestorRecursos();
-    this.material = gestor.getRecurso(mtl, "material");
+    let gestormat = new TGestorRecursos();
+    this.material = gestormat.getRecurso(mtl, "material");
   }
 
   getMalla(){

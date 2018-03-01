@@ -2,7 +2,6 @@ class TRecursoMaterial extends TRecurso{
 
   constructor(){
     super();
-
     this.colorDifuso;
     this.colorEpecular;
     this.colorAmbiente;
