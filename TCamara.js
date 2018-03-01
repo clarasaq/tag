@@ -21,7 +21,7 @@ class TCamara extends TEntidad {
 	}
 
 	//left, right y top ?????
-	setParalela (near, far left, right, top){
+	setParalela (near, far, left, right, top){
 		this.esPrespectiva=false;
 		let out= mat4.create();
 		mat4.ortho(out, left, right, bottom, top, near, far);

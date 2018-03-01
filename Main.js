@@ -55,7 +55,16 @@ class Main {
     console.log("-----------------");
     console.log("END RECURSOS");
 
+<<<<<<< HEAD
 
+=======
+    //---- Transformacion ----//
+     //TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2);
+     // console.log(TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2));
+    // TransfRotaLuz.getMatrix();
+    //console.log("STACK");
+    //this.stack.draw();
+>>>>>>> master
 
 
     Escena.removeHijo(RotaLuz);
