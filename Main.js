@@ -38,12 +38,12 @@ class Main {
     NMall.setEntidad(EntMalla);
 
     NMall.entidad.cargarMalla("cube-mini.json");
-    NMall.entidad.beginDraw();
+    /*NMall.entidad.beginDraw();*/ //No hace falta porque Escena.draw() ya llama a la funcion de beginDraw de TMalla
     NMall.entidad.cargarMaterial("box.mtl");
 
     //---- Pintamos el árbol ----//
     console.log("**************");
-    //Escena.draw();
+    Escena.draw();
 
     console.log("-----------------");
     console.log("START RECURSOS");
