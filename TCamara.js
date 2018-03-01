@@ -1,8 +1,7 @@
 class TCamara extends TEntidad {
 
-	constructor(n){
+	constructor(){
 		super();
-		this.nombre=n;
 		this.esPrespectiva=false;//Boolean
 		this.cercano=null;//Float
 		this.lejano=null;//Float
@@ -21,7 +20,7 @@ class TCamara extends TEntidad {
 	}
 
 	//left, right y top ?????
-	setParalela (near, far left, right, top){
+	setParalela (near, far, left, right, top){
 		this.esPrespectiva=false;
 		let out= mat4.create();
 		mat4.ortho(out, left, right, bottom, top, near, far);

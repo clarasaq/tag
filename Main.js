@@ -15,7 +15,7 @@ class Main {
     var TraslaCoche = new TNodo("TraslaCoche", RotaCoche);
     var NMall = new TNodo("NMall", TraslaCoche);
 
-    //---- Añadir las entidades a los nodos ----//
+    //---- Creamos la entidad ----//
     var TransfRotaLuz = new TTransform("Rotaluz_matrix");
     var TransfRotaCam = new TTransform("Rotacam_matrix");
     var TransfRotaCoche = new TTransform("Rotacoche_matrix");
@@ -24,6 +24,7 @@ class Main {
 
     var EntLuz = new TLuz("NLuz");
 
+    //-----asociamos la entidad ---//
     RotaLuz.setEntidad(TransfRotaLuz);
     RotaCam.setEntidad(TransfRotaCam);
     RotaCoche.setEntidad(TransfRotaCoche);

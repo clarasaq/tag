@@ -1,8 +1,7 @@
 class TMalla extends TEntidad{
 
-  constructor(nombre){
+  constructor(){
     super();
-    this.nombre = nombre;
     this.malla = null;
   }
 
