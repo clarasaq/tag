@@ -47,6 +47,7 @@ class Main {
 
     //---- Recurso ----//
     var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
+    var recursoMaterial = gestorRecursos.getRecurso('box.mtl', 'material');
 
     //---- Recurso Malla ----//
     recursoMalla.draw();
