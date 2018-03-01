@@ -5,22 +5,31 @@ class TMalla extends TEntidad{
     this.nombre = nombre;
     this.malla = null;
     this.material = new TColor;
+    console.log("caca");
   }
 
   cargarMalla(m){
-    mallaRecurso = new TRecursoMalla();
-    console.log("Malla de TRecursoMalla creado");
-    mallaRecurso.cargarFichero(m);
-    console.log("mallaRecurso: " + mallaRecurso);
-    this.malla = mallaRecurso;
+
+    let gestor = new TGestorRecursos();
+    this.malla = gestor.getRecurso(m, "malla");
+    
+    //
+    // let mallaRecurso;
+    //
+    // mallaRecurso = new TRecursoMalla();
+    // console.log("Malla de TRecursoMalla creado");
+    // mallaRecurso.cargarFichero(m);
+    // console.log("mallaRecurso: " + mallaRecurso);
+    // this.malla = mallaRecurso;
   }
 
   getMalla(){
-    return malla;
+    return this.malla;
   }
 
   beginDraw(){
-    malla.draw;
+    console.log("a ver si entrasS");
+    this.malla.draw();
   }
 
   endDraw(){

@@ -16,7 +16,7 @@ class TGestorRecursos{
     if(tipo == "malla"){
       console.log('el fichero de tipo malla ' + nombre + ' no existe por ello lo creamos');
       recurso = new TRecursoMalla();
-      //lamamos a cargar el recurso
+      //llamamos a cargar el recurso
       recurso.cargarFichero(nombre);
       //lo añadimos al array de recursos
       this.recursos.push(recurso);

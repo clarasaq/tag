@@ -13,7 +13,11 @@ class Main {
     var NLuz = new TNodo("NLuz", TraslaLuz);
 
     var TraslaCoche = new TNodo("TraslaCoche", RotaCoche);
-    var NMall = new TNodo("NMall", TraslaCoche);
+
+    var RotaMalla = new TNodo("RotaMalla", Escena);
+    var TraslaMalla = new TNodo("TraslaMalla", RotaMalla);
+    var NMall = new TNodo("NMall", TraslaMalla);
+
 
     //---- Añadir las entidades a los nodos ----//
     var TransfRotaLuz = new TTransform("Rotaluz_matrix");
@@ -31,6 +35,17 @@ class Main {
     TraslaLuz.setEntidad(TransfTraslaLuz);
     NLuz.setEntidad(EntLuz);
 
+<<<<<<< HEAD
+=======
+    var EntMalla = new TMalla("EntMalla");
+    NMall.setEntidad(EntMalla);
+
+    NMall.entidad.cargarMalla("cube-mini.json");
+    NMall.entidad.beginDraw();
+
+
+
+>>>>>>> master
     //---- Pintamos el árbol ----//
     console.log("**************");
     //---- Transformacion ----//
@@ -45,6 +60,7 @@ class Main {
     //---- Gestor Recursos ----//
     var gestorRecursos = new TGestorRecursos();
 
+<<<<<<< HEAD
     //---- Recurso ----//
     var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
     var recursoMaterial = gestorRecursos.getRecurso('box.mtl', 'material');
@@ -52,6 +68,8 @@ class Main {
     //---- Recurso Malla ----//
     recursoMalla.draw();
 
+=======
+>>>>>>> master
     console.log("-----------------");
     console.log("END RECURSOS");
 
