@@ -49,6 +49,7 @@ class TTransform extends TEntidad{
   rotar(rad, axis1, axis2, axis3){
     let axis = vec3.fromValues(axis1, axis2, axis3);
     mat4.rotate(this.transfMatrix, this.transfMatrix, rad, axis);
+  }
 
   beginDraw(){
     // console.log("Apilamos id: " + this.id);
