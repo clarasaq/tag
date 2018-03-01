@@ -1,8 +1,8 @@
 class TRecursoMaterial extends TRecurso{
-<<<<<<< HEAD
+
   constructor(){
     super();
-    
+
     this.colorDifuso;
     this.colorEpecular;
     this.colorAmbiente;
@@ -25,9 +25,5 @@ class TRecursoMaterial extends TRecurso{
       console.log(this.req);
     }
   }
-=======
-  constructor(){}
-  //buscar estructura archivos .mtl leerlo y cargarlo como hacemos con la TRecursoMalla
-  //almacenar color difuso, color especular, etc
->>>>>>> master
+
 }

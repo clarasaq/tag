@@ -35,8 +35,7 @@ class Main {
     TraslaLuz.setEntidad(TransfTraslaLuz);
     NLuz.setEntidad(EntLuz);
 
-<<<<<<< HEAD
-=======
+
     var EntMalla = new TMalla("EntMalla");
     NMall.setEntidad(EntMalla);
 
@@ -45,7 +44,6 @@ class Main {
 
 
 
->>>>>>> master
     //---- Pintamos el árbol ----//
     console.log("**************");
     //---- Transformacion ----//
@@ -60,7 +58,6 @@ class Main {
     //---- Gestor Recursos ----//
     var gestorRecursos = new TGestorRecursos();
 
-<<<<<<< HEAD
     //---- Recurso ----//
     var recursoMalla = gestorRecursos.getRecurso('cube.json', 'malla');
     var recursoMaterial = gestorRecursos.getRecurso('box.mtl', 'material');
@@ -68,21 +65,16 @@ class Main {
     //---- Recurso Malla ----//
     recursoMalla.draw();
 
-=======
->>>>>>> master
+
     console.log("-----------------");
     console.log("END RECURSOS");
 
-<<<<<<< HEAD
-
-=======
     //---- Transformacion ----//
      //TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2);
      // console.log(TransfRotaCam.trasladar(TransfRotaCam.getMatrix(), 4, 3, 2));
     // TransfRotaLuz.getMatrix();
     //console.log("STACK");
     //this.stack.draw();
->>>>>>> master
 
 
     Escena.removeHijo(RotaLuz);
