@@ -12,8 +12,11 @@ class TMalla extends TEntidad{
 
     let gestor = new TGestorRecursos();
     this.malla = gestor.getRecurso(m, "malla");
-
-    //
+/*
+    let mallagestor= new TRecursoMalla();
+    mallagestor.cargarFichero(m);
+    this.malla  = mallagestor;
+*/
     // let mallaRecurso;
     //
     // mallaRecurso = new TRecursoMalla();
