@@ -7,10 +7,7 @@ class MainF{
     let camara1 = fachada.crearCamaraCompleto("camara1");
     let luz1 = fachada.crearLuzCompleto("luz1");
 
-    let material = fachada.crearMaterial("materialV", "box.mtl");
-    let vagina = fachada.crearMallaCompleto("Vagina", "cube-mini.json");
-
-
+    let vagina = fachada.crearMallaCompleto("Vagina", "cube-mini.json", "box.mtl");
 
     fachada.draw();
   }

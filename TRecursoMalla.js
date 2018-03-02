@@ -70,7 +70,6 @@ class TRecursoMalla extends TRecurso{
     var canvas = document.getElementById('canvas');
 
     console.log('Estamos en TRecursoMalla y hacemos draw');
-    console.log(canvas);
 
     var gl = this.initWebGL(canvas);
     /*======== Defining and storing the geometry ===========*/
