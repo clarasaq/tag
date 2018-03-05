@@ -1,32 +1,14 @@
 class TMalla extends TEntidad{
 
-  constructor(nombre){
+  constructor(){
     super();
-    this.nombre = nombre;
     this.malla = null;
     this.material = null;
-    console.log("caca");
-  }
 
-  cargarMalla(m){
-
-    let gestor = new TGestorRecursos();
-    this.malla = gestor.getRecurso(m, "malla");
-/*
-    let mallagestor= new TRecursoMalla();
-    mallagestor.cargarFichero(m);
-    this.malla  = mallagestor;
-*/
-    // let mallaRecurso;
-    //
-    // mallaRecurso = new TRecursoMalla();
-    // console.log("Malla de TRecursoMalla creado");
-    // mallaRecurso.cargarFichero(m);
-    // console.log("mallaRecurso: " + mallaRecurso);
-    // this.malla = mallaRecurso;
   }
 
   cargarMaterial(mtl){
+    console.log("Entro a cargarMaterial");
     let gestormat = new TGestorRecursos();
     this.material = gestormat.getRecurso(mtl, "material");
   }
@@ -36,7 +18,7 @@ class TMalla extends TEntidad{
   }
 
   beginDraw(){
-    console.log("a ver si entrasS");
+    console.log("Model Matrix:" +this.modelMatrix);
     this.malla.draw();
   }
 

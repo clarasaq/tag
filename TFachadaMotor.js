@@ -1,0 +1,69 @@
+class TFachadaMotor {
+
+  constructor(){
+    this.escena = new TNodo("Escena");
+    this.gestor = new TGestorRecursos();
+    //Registros
+    this.RegLuces = [];
+    this.RegCamaras= [];
+    //atributos para mantenimiento de las camaras, luces, viewports...
+  }
+
+  crearNodo(nombre, padre, entidad){
+    let nodo = new TNodo(nombre, padre);
+    if (entidad != null){
+      nodo.setEntidad(entidad);
+    }
+    return nodo;
+  }
+
+  crearTransform(){
+    let trans = new TTransform();
+    return trans;
+  }
+
+  crearCamara(nombre, padre){
+    let nodo = new TNodo(nombre, padre);
+  	let camara = new TCamara();
+  	nodo.setEntidad(camara);
+  	return nodo;
+  }
+  crearCamaraCompleto(nombre){
+    let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
+    let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
+    let cam = this.crearCamara(nombre, trasla);
+    return cam;
+  }
+
+  crearLuz(nombre, padre){
+    let nodo = new TNodo(nombre, padre);
+  	let luz = new TLuz();
+  	nodo.setEntidad(luz);
+  	return nodo;
+  }
+  crearLuzCompleto(nombre){
+    let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
+    let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
+    let luz = this.crearLuz(nombre, trasla);
+    return luz;
+  }
+
+  crearMalla(nombre, ficheroMalla, ficheroMaterial, padre){
+    let nodo = new TNodo(nombre, padre);
+    let entMalla = new TMalla();
+    nodo.setEntidad(entMalla);
+    entMalla.malla = this.gestor.getRecurso(ficheroMalla, "malla");
+    entMalla.material = this.gestor.getRecurso(ficheroMaterial, "material");
+    return entMalla;
+  }
+  crearMallaCompleto(nombre, ficheroMalla, ficheroMaterial){
+    let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
+    let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
+    let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial, trasla);
+    return malla;
+  }
+
+  draw(){
+    this.escena.draw();
+  }
+}

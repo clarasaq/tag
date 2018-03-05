@@ -18,7 +18,7 @@ class Main {
     var TraslaMalla = new TNodo("TraslaMalla", RotaMalla);
     var NMall = new TNodo("NMall", TraslaMalla);
 
-    //---- Añadir las entidades a los nodos ----//
+    //---- Creamos la entidad ----//
     var TransfRotaLuz = new TTransform("Rotaluz_matrix");
     var TransfRotaCam = new TTransform("Rotacam_matrix");
     var TransfRotaCoche = new TTransform("Rotacoche_matrix");
@@ -27,6 +27,7 @@ class Main {
 
     var EntLuz = new TLuz("NLuz");
 
+    //-----asociamos la entidad ---//
     RotaLuz.setEntidad(TransfRotaLuz);
     RotaCam.setEntidad(TransfRotaCam);
     RotaCoche.setEntidad(TransfRotaCoche);
@@ -38,12 +39,12 @@ class Main {
     NMall.setEntidad(EntMalla);
 
     NMall.entidad.cargarMalla("cube-mini.json");
-    NMall.entidad.beginDraw();
+    /*NMall.entidad.beginDraw();*/ //No hace falta porque Escena.draw() ya llama a la funcion de beginDraw de TMalla
     NMall.entidad.cargarMaterial("box.mtl");
 
     //---- Pintamos el árbol ----//
     console.log("**************");
-    //Escena.draw();
+    Escena.draw();
 
     console.log("-----------------");
     console.log("START RECURSOS");

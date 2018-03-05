@@ -1,8 +1,7 @@
 class TCamara extends TEntidad {
 
-	constructor(n){
+	constructor(){
 		super();
-		this.nombre=n;
 		this.esPrespectiva=false;//Boolean
 		this.cercano=null;//Float
 		this.lejano=null;//Float
