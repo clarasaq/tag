@@ -78,6 +78,7 @@ class TRecursoMalla extends TRecurso{
 
      var indices = this.indices;
 
+
      // Create an empty buffer object to store vertex buffer
      var vertex_buffer = gl.createBuffer();
      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
@@ -92,6 +93,7 @@ class TRecursoMalla extends TRecurso{
 
      /*================ Shaders ====================*/
      // Vertex shader source code
+
      var vertCode =
         'attribute vec3 coordinates;' +
 
@@ -110,10 +112,11 @@ class TRecursoMalla extends TRecurso{
         '}'; //fragment shader source code
 
      // Create fragment shader object
+
      var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
      gl.shaderSource(fragShader, fragCode); // adjuntar con fragCode
      gl.compileShader(fragShader);  // Compilar fragShader
-
+     console.log(fragShader);
      // Objeto de programa para almacenar el programa de sombreado combinado
      var shaderProgram = gl.createProgram();
      gl.attachShader(shaderProgram, vertShader);  // adjuntar con vertShader
@@ -122,12 +125,22 @@ class TRecursoMalla extends TRecurso{
      gl.linkProgram(shaderProgram); // Link both the programs
      gl.useProgram(shaderProgram);  // Use the combined shader program object
 
+     console.log(shaderProgram);
+
+      // var prueba = new TShader();
+      // prueba.cargarFichero("vertShader.vert");
+      // prueba.cargarFichero("fragShader.frag");
+      // prueba.loadShaders();
+
      /*======= Associating shaders to buffer objects =======*/
      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer); // Bind vertex buffer object
      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);  // Bind index buffer object
 
      // Get the attribute location
-     var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+    var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+    //  console.log(prueba.getShaderProgram());
+    //  var aux = prueba.getShaderProgram();
+    //  var coord = gl.getAttribLocation(aux, "coordinates");
      gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
      gl.enableVertexAttribArray(coord);
 
