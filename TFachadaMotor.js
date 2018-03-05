@@ -3,9 +3,9 @@ class TFachadaMotor {
   constructor(){
     this.escena = new TNodo("Escena");
     this.gestor = new TGestorRecursos();
-    //Registros
-    this.RegLuces = [];
-    this.RegCamaras= [];
+    //Registros objetos
+    this.regLuces = [];
+    this.regCamaras= [];
     //atributos para mantenimiento de las camaras, luces, viewports...
   }
 
@@ -17,8 +17,13 @@ class TFachadaMotor {
     return nodo;
   }
 
+  borrarNodo(nodo){
+    let padre = nodo.getPadre();
+    padre.removeHijo(nodo);
+  }
+
   crearTransform(){
-    let trans = new TTransform();
+    let trans = new TTransformacion();
     return trans;
   }
 
@@ -32,7 +37,14 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
+    this.regCamaras.push(cam);
     return cam;
+  }
+  borrarCamaraCompleto(){
+    for(let i=0; i<this.regCamaras.length; i++){
+      this.escena.removeHijo(this.regCamaras[i].getPadre().getPadre());
+      this.regCamaras[i] = 0;
+    }
   }
 
   crearLuz(nombre, padre){
@@ -45,7 +57,14 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
+    this.regLuces.push(luz);
     return luz;
+  }
+  borrarLuzCompleto(){
+    for(let i=0; i<this.regLuces.length; i++){
+      this.escena.removeHijo(this.regLuces[i].getPadre().getPadre());
+      this.regLuces[i] = 0;
+    }
   }
 
   crearMalla(nombre, ficheroMalla, ficheroMaterial, padre){
@@ -60,8 +79,17 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial, trasla);
+    console.log(malla);
     return malla;
   }
+  // borrarMallaCompleto(){
+  //   for(let i=0; i<this.regLuces.length; i++){
+  //     this.escena.removeHijo(this.regLuces[i].getPadre().getPadre());
+  //     this.regLuces[i] = 0;
+  //   }
+  // }
+
+  //borrar Malla???
 
   draw(){
     this.escena.draw();

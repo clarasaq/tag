@@ -19,11 +19,11 @@ class Main {
     var NMall = new TNodo("NMall", TraslaMalla);
 
     //---- Creamos la entidad ----//
-    var TransfRotaLuz = new TTransform("Rotaluz_matrix");
-    var TransfRotaCam = new TTransform("Rotacam_matrix");
-    var TransfRotaCoche = new TTransform("Rotacoche_matrix");
+    var TransfRotaLuz = new TTransformacion("Rotaluz_matrix");
+    var TransfRotaCam = new TTransformacion("Rotacam_matrix");
+    var TransfRotaCoche = new TTransformacion("Rotacoche_matrix");
 
-    var TransfTraslaLuz = new TTransform("Traslaluz_matrix");
+    var TransfTraslaLuz = new TTransformacion("Traslaluz_matrix");
 
     var EntLuz = new TLuz("NLuz");
 

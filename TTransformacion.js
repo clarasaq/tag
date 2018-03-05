@@ -1,4 +1,4 @@
-class TTransform extends TEntidad{
+class TTransformacion extends TEntidad{
 
   constructor() {
     super();
@@ -46,15 +46,13 @@ class TTransform extends TEntidad{
 
 
   beginDraw(){
-    this.stack.push(this.transfMatrix);
-
+    this.stack.push(this.modelMatrix);
     //mat4.multiply(out, a, b);
     mat4.multiply(this.modelMatrix, this.modelMatrix, this.transfMatrix);
   }
 
   endDraw(){
-    console.log("Desapilamos id: " + this.stack[this.stack.length-1]);
+    console.log("Desapilamos matriz: " + this.stack[this.stack.length-1]);
     this.modelMatrix = this.stack.pop();
-    // console.log(this.modelMatrix);
   }
 }
