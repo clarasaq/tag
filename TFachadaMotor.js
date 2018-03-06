@@ -6,7 +6,8 @@ class TFachadaMotor {
     //Registros objetos
     this.regLuces = [];
     this.regCamaras= [];
-    //atributos para mantenimiento de las camaras, luces, viewports...
+    this.regLucesActivas = [];
+    this.regCamarasActivas = [];
   }
 
   crearNodo(nombre, padre, entidad){
@@ -16,7 +17,6 @@ class TFachadaMotor {
     }
     return nodo;
   }
-
   borrarNodo(nodo){
     let padre = nodo.getPadre();
     padre.removeHijo(nodo);
@@ -27,6 +27,7 @@ class TFachadaMotor {
     return trans;
   }
 
+//---- Camara ----//
   crearCamara(nombre, padre){
     let nodo = new TNodo(nombre, padre);
   	let camara = new TCamara();
@@ -38,15 +39,32 @@ class TFachadaMotor {
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
     this.regCamaras.push(cam);
+    this.regCamarasActivas.push(0); //la apilo a la vez indicando que esta desactivada
     return cam;
+  }
+  activarCamara(camara){
+    for(let i=0; i<this.regCamaras.length; i++){
+      if (this.regCamaras[i] == camara){
+        this.regCamarasActivas[i] = 1;
+      }
+    }
+  }
+  desactivarCamara(camara){
+    for(let i=0; i<this.regCamaras.length; i++){
+      if (this.regCamaras[i] == camara){
+        this.regCamarasActivas[i] = 0;
+      }
+    }
   }
   borrarCamaraCompleto(){
     for(let i=0; i<this.regCamaras.length; i++){
       this.escena.removeHijo(this.regCamaras[i].getPadre().getPadre());
-      this.regCamaras[i] = 0;
+      this.regCamaras[i] = 0; // -1??
+      this.regCamarasActivas[i] = -1;
     }
   }
 
+//---- luz ----//
   crearLuz(nombre, padre){
     let nodo = new TNodo(nombre, padre);
   	let luz = new TLuz();
@@ -58,15 +76,32 @@ class TFachadaMotor {
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
     this.regLuces.push(luz);
+    this.regLucesActivas.push(0);
     return luz;
+  }
+  activarLuz(luz){
+    for(let i=0; i<this.regLuces.length; i++){
+      if (this.regLuces[i] == luz){
+        this.regLucesActivas[i] = 1;
+      }
+    }
+  }
+  desactivarLuz(luz){
+    for(let i=0; i<this.regLuces.length; i++){
+      if (this.regLuces[i] == luz){
+        this.regLucesActivas[i] = 0;
+      }
+    }
   }
   borrarLuzCompleto(){
     for(let i=0; i<this.regLuces.length; i++){
       this.escena.removeHijo(this.regLuces[i].getPadre().getPadre());
-      this.regLuces[i] = 0;
+      this.regLuces[i] = 0; //-1??
+      this.regLucesActivas[i] = -1;
     }
   }
 
+//---- Malla ----//
   crearMalla(nombre, ficheroMalla, ficheroMaterial, padre){
     let nodo = new TNodo(nombre, padre);
     let entMalla = new TMalla();
@@ -82,14 +117,6 @@ class TFachadaMotor {
     console.log(malla);
     return malla;
   }
-  // borrarMallaCompleto(){
-  //   for(let i=0; i<this.regLuces.length; i++){
-  //     this.escena.removeHijo(this.regLuces[i].getPadre().getPadre());
-  //     this.regLuces[i] = 0;
-  //   }
-  // }
-
-  //borrar Malla???
 
   draw(){
     this.escena.draw();
