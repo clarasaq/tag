@@ -11,12 +11,5 @@ class MainF{
 
     fachada.draw();
 
-    console.log(">>>>>>> BORRANDO VOYYYY BORRANDO VENGO <<<<<<<<<");
-
-
-    let borrando = fachada.borrarLuzCompleto();
-
-    fachada.draw();
-
   }
 }

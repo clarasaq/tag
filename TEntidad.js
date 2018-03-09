@@ -9,6 +9,5 @@ class TEntidad {
   }
 
   beginDraw(){}
-
   endDraw(){}
 }

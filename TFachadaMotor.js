@@ -4,10 +4,10 @@ class TFachadaMotor {
     this.escena = new TNodo("Escena");
     this.gestor = new TGestorRecursos();
     //Registros objetos
-    this.regLuces = [];
-    this.regCamaras= [];
-    this.regLucesActivas = [];
-    this.regCamarasActivas = [];
+    this.regLuces = new Array();
+    this.regCamaras = new Array();
+    this.regCamarasActivas = new Array();
+    this.regLucesActivas = new Array();
   }
 
   crearNodo(nombre, padre, entidad){
@@ -32,14 +32,13 @@ class TFachadaMotor {
     let nodo = new TNodo(nombre, padre);
   	let camara = new TCamara();
   	nodo.setEntidad(camara);
+    this.regCamaras.push(nodo);
   	return nodo;
   }
   crearCamaraCompleto(nombre){
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
-    this.regCamaras.push(cam);
-    this.regCamarasActivas.push(0); //la apilo a la vez indicando que esta desactivada
     return cam;
   }
   activarCamara(camara){
@@ -59,8 +58,8 @@ class TFachadaMotor {
   borrarCamaraCompleto(){
     for(let i=0; i<this.regCamaras.length; i++){
       this.escena.removeHijo(this.regCamaras[i].getPadre().getPadre());
-      this.regCamaras[i] = 0; // -1??
-      this.regCamarasActivas[i] = -1;
+      this.regCamaras[i] = 0;
+      this.regLucesActivas[i] = -1; // indico que no existe
     }
   }
 
@@ -69,14 +68,13 @@ class TFachadaMotor {
     let nodo = new TNodo(nombre, padre);
   	let luz = new TLuz();
   	nodo.setEntidad(luz);
+    this.regLuces.push(nodo);
   	return nodo;
   }
   crearLuzCompleto(nombre){
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
-    this.regLuces.push(luz);
-    this.regLucesActivas.push(0);
     return luz;
   }
   activarLuz(luz){
@@ -96,7 +94,7 @@ class TFachadaMotor {
   borrarLuzCompleto(){
     for(let i=0; i<this.regLuces.length; i++){
       this.escena.removeHijo(this.regLuces[i].getPadre().getPadre());
-      this.regLuces[i] = 0; //-1??
+      this.regLuces[i] = 0;
       this.regLucesActivas[i] = -1;
     }
   }
@@ -116,6 +114,19 @@ class TFachadaMotor {
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial, trasla);
     console.log(malla);
     return malla;
+  }
+
+  getCamaras(){
+    return this.regCamaras;
+  }
+  getLuces(){
+    return this.regLuces;
+  }
+  getCamarasActivas(){
+    return this.regCamarasActivas;
+  }
+  getLucesActivas(){
+    return this.regLucesActivas;
   }
 
   draw(){
