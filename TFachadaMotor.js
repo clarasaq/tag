@@ -100,18 +100,19 @@ class TFachadaMotor {
   }
 
 //---- Malla ----//
-  crearMalla(nombre, ficheroMalla, ficheroMaterial, padre){
+  crearMalla(nombre, ficheroMalla, ficheroMaterial, ficheroTextura, padre){
     let nodo = new TNodo(nombre, padre);
     let entMalla = new TMalla();
     nodo.setEntidad(entMalla);
     entMalla.malla = this.gestor.getRecurso(ficheroMalla, "malla");
     entMalla.material = this.gestor.getRecurso(ficheroMaterial, "material");
+    entMalla.textura = this.gestor.getRecurso(ficheroTextura, "textura");
     return entMalla;
   }
-  crearMallaCompleto(nombre, ficheroMalla, ficheroMaterial){
+  crearMallaCompleto(nombre, ficheroMalla, ficheroMaterial, ficheroTextura){
     let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
-    let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial, trasla);
+    let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial, ficheroTextura, trasla);
     console.log(malla);
     return malla;
   }
