@@ -22,6 +22,7 @@ class TGestorRecursos{
       this.recursos.push(recurso);
 
     }else if(tipo == "textura"){
+      console.log("Enhorabuena, ha sido una TEXTURA");
       recurso = new TRecursoTextura();
       recurso.cargarFichero(nombre);
       this.recursos.push(recurso);
