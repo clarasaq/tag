@@ -112,7 +112,19 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial, trasla);
-    console.log(malla);
+
+    //Guaro las matrices de forma global para obtenerlas en el shader
+    GlobalMalla = malla;
+    GModelMatrix=GlobalMalla.modelMatrix;
+    GViewMatrix= GlobalMalla.viewMatrix;
+    GProjectionMatrix = GlobalMalla.projectionMatrix
+    console.log(  GModelMatrix);
+    console.log(GViewMatrix)
+    console.log(GModelMatrix*GViewMatrix)
+    GModelViewMatrix=GModelMatrix*GViewMatrix;
+    console.log(GModelViewMatrix)
+    gMVP = GModelViewMatrix*GProjectionMatrix
+    console.log(GlobalMalla);
     return malla;
   }
 

@@ -78,33 +78,45 @@ class TRecursoMalla extends TRecurso{
 
      var indices = this.indices;
 
+     var normales = this.normales;
 
-     // Create an empty buffer object to store vertex buffer
-     var vertex_buffer = gl.createBuffer();
-     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-     gl.bindBuffer(gl.ARRAY_BUFFER, null); //unbind -> desatar
 
-     // Create an empty buffer object to store Index buffer
-     var Index_Buffer = gl.createBuffer();
-     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
-     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+    //  // Create an empty buffer object to store vertex buffer
+    //  var vertex_buffer = gl.createBuffer();
+    //  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+    //  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    //  gl.bindBuffer(gl.ARRAY_BUFFER, null); //unbind -> desatar
+     //
+    //  // Create an empty buffer object to store Index buffer
+    //  var Index_Buffer = gl.createBuffer();
+    //  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+    //  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+    //  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+
 
      /*================ Shaders ====================*/
      // Vertex shader source code
 
-     var vertCode =
-        'attribute vec3 coordinates;' +
 
-        'void main(void) {' +
-           ' gl_Position = vec4(coordinates, 1.0);' +
-        '}';
+    // Cargo los shaders
+     var shaders = new TShader();
+     shaders.cargarFichero('fragShader.frag');
+     shaders.cargarFichero('vertShader.vert');
 
-     // Create a vertex shader object
-     var vertShader = gl.createShader(gl.VERTEX_SHADER);
-     gl.shaderSource(vertShader, vertCode); // adjuntar con vertCode
-     gl.compileShader(vertShader);  // Compilar vertShader
+     shaders.loadShaders(vertices, indices, normales);
+
+/*
+      var vertCode =
+         'attribute vec3 coordinates;' +
+
+         'void main(void) {' +
+            ' gl_Position = vec4(coordinates, 1.0);' +
+       '}';
+
+    // Create a vertex shader object
+    var vertShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertShader, vertCode); // adjuntar con vertCode
+      gl.compileShader(vertShader);  // Compilar vertShader
 
      var fragCode =
         'void main(void) {' +
@@ -126,29 +138,27 @@ class TRecursoMalla extends TRecurso{
      gl.useProgram(shaderProgram);  // Use the combined shader program object
 
      console.log(shaderProgram);
-
-      // var prueba = new TShader();
-      // prueba.cargarFichero("vertShader.vert");
-      // prueba.cargarFichero("fragShader.frag");
-      // prueba.loadShaders();
-
+*/
      /*======= Associating shaders to buffer objects =======*/
-     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer); // Bind vertex buffer object
+  /*   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer); // Bind vertex buffer object
      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);  // Bind index buffer object
 
      // Get the attribute location
     var coord = gl.getAttribLocation(shaderProgram, "coordinates");
-    //  console.log(prueba.getShaderProgram());
-    //  var aux = prueba.getShaderProgram();
-    //  var coord = gl.getAttribLocation(aux, "coordinates");
+    // var coord = gl.getAttribLocation(shaders.getShaderProgram(), "coordinates");
+     //console.log(prueba.getShaderProgram());
+     //var aux = prueba.getShaderProgram();
+     //var coord = gl.getAttribLocation(aux, "coordinates");
      gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
      gl.enableVertexAttribArray(coord);
 
-     /*=========Drawing the triangle===========*/
+    //  /*=========Drawing the triangle===========*/
+/*
      gl.viewport(0,0,canvas.width,canvas.height);
      //gl.drawElements(Mode, Count, Type, Offset)
      gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
      // gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT,0);
+  */
 
   }
 }
