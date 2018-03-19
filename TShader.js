@@ -115,18 +115,33 @@ var coord = gl.getAttribLocation(programa, "coordinates");
 gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(coord);
 
+//NORMAL
+var sNormal = gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
+gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(sNormal);
+
 
 //Le paso las matrices al shader
-console.log(GModelViewMatrix);
+
+//VERTEX SHADER
+
+//Obtengo la ModelViewMatrix con la libreria GLMATRIX
+GModelViewMatrix = mat4.create();
+mat4.multiply(GModelViewMatrix, GModelMatrix, GViewMatrix );
+//console.log(GModelViewMatrix);
 //ModelViewMatrix
 var SModelViewMatrix = gl.getUniformLocation(programa, "ModelViewMatrix");
 gl.uniformMatrix4fv(SModelViewMatrix,gl.False,GModelViewMatrix);
 
 //ProjectionMatrix
+//console.log(GProjectionMatrix);
 var SProjectionMatrix = gl.getUniformLocation(programa, "ProjectionMatrix");
-gl.uniformMatrix4fv(SProjectionMatrix,gl.FALSE,GModelMatrix);
+gl.uniformMatrix4fv(SProjectionMatrix,gl.FALSE,GProjectionMatrix);
 
 //MVP
+//console.log(gMVP);
+gMVP = mat4.create();
+mat4.multiply(gMVP, GModelViewMatrix, GProjectionMatrix);
 var sMVP = gl.getUniformLocation(programa, "MVP");
 gl.uniformMatrix4fv(sMVP, gl.FALSE,gMVP);
 
@@ -134,12 +149,45 @@ gl.uniformMatrix4fv(sMVP, gl.FALSE,gMVP);
 
 
 
+//FRAGMENT SHADER
 
+//Paso las componentes del material
+//COMPONENTE DIFUSA
+//console.log(GDifuso);
+var SDifusa = gl.getUniformLocation(programa, "kd");
+gl.uniform3fv(SDifusa, GDifuso);
 
-//Fragment Shader
+//COMPONENTE AMBIENTAL
+//console.log(GAmbiental);
+var SAmbiental = gl.getUniformLocation(programa, "ka");
+gl.uniform3fv(SAmbiental, GAmbiental);
+
+//COMPONENTE ESPECULAR
+//console.log(GEspecular);
+var SEspecular = gl.getUniformLocation(programa, "ks");
+gl.uniform3fv(SEspecular, GEspecular);
+
+//COMPONENTE DE BRILLO
+var SBrillo = gl.getUniformLocation(programa, "Shininess");
+gl.uniform1f(SBrillo, GBrillo);
+
+//FRAGCOLOR
 var color = gl.getUniformLocation(programa, "color");
 var aux= [0.7,0.2,0.7,1.0];
+console.log(GFragColor);
 gl.uniform4fv(color,aux);
+
+//LIGTHPOSITION
+ var SPosicionLuz = gl.getUniformLocation(programa, "LightPosition");
+ gl.uniform4fv(SPosicionLuz, GPositionLuz);
+
+ //LIGTHINTENSITY
+var SIntensidad = gl.getUniformLocation(programa, "LightIntensity");
+gl.uniform3fv = gl.uniform3fv(SIntensidad, GIntensidadLuz);
+
+
+
+
 
 
 /*=========Drawing the triangle===========*/
