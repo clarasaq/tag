@@ -38,6 +38,7 @@ class TGestorRecursos{
 
     console.log('devolvemos el TRecursoMalla');
     console.log(recurso);
+    
     return recurso;
   }
 }

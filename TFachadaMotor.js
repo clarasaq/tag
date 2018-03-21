@@ -39,6 +39,7 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
+    trasla.entidad.trasladar(20000000,20,20);
     return cam;
   }
   activarCamara(camara){
@@ -69,12 +70,19 @@ class TFachadaMotor {
   	let luz = new TLuz();
   	nodo.setEntidad(luz);
     this.regLuces.push(nodo);
+    console.log('**************************************');
+    console.log(this.regLuces);
+    console.log(this.regLuces[0].entidad.modelMatrix);
+    GPositionLuz = this.regLuces[0].entidad.modelMatrix;
   	return nodo;
   }
   crearLuzCompleto(nombre){
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
+    trasla.entidad.trasladar(20000000,20,20);
+
+
     return luz;
   }
   activarLuz(luz){
@@ -83,6 +91,7 @@ class TFachadaMotor {
         this.regLucesActivas[i] = 1;
       }
     }
+    console.log(luz);
   }
   desactivarLuz(luz){
     for(let i=0; i<this.regLuces.length; i++){
@@ -112,20 +121,29 @@ class TFachadaMotor {
   crearMallaCompleto(nombre, ficheroMalla, ficheroMaterial, ficheroTextura){
     let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
-    let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial, trasla);
+    let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
 
     //Guaro las matrices de forma global para obtenerlas en el shader
     GlobalMalla = malla;
-    GModelMatrix=GlobalMalla.modelMatrix;
+    GMaterial = malla.material;
+    // GModelMatrix=GlobalMalla.modelMatrix;
     GViewMatrix= GlobalMalla.viewMatrix;
     GProjectionMatrix = GlobalMalla.projectionMatrix
-    console.log(  GModelMatrix);
-    console.log(GViewMatrix)
-    console.log(GModelMatrix*GViewMatrix)
-    GModelViewMatrix=GModelMatrix*GViewMatrix;
-    console.log(GModelViewMatrix)
-    gMVP = GModelViewMatrix*GProjectionMatrix
-    console.log(GlobalMalla);
+    //Guardo los valores del material para mandarlos al shader
+    GDifuso = GMaterial.colorDifuso;
+    GAmbiental = GMaterial.colorAmbiente;
+    GEspecular = GMaterial.colorEpecular;
+    GFragColor = GMaterial.frag_color;
+    GBrillo = GMaterial.iluminacion;
+    GIntensidadLuz = GMaterial.vertexColor;
+    console.log('***********************************************')
+    console.log(GIntensidadLuz)
+    /*console.log('Model Matrix');
+    console.log(GModelMatrix);
+    console.log('View Matrix');
+    console.log(GViewMatrix)*/
+    console.log(malla.material);
+    /*console.log(GlobalMalla);*/
     return malla;
   }
 

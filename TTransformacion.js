@@ -28,7 +28,10 @@ class TTransformacion extends TEntidad{
 
   trasladar( tx, ty, tz){
     let v = vec3.fromValues(tx, ty, tz);
+
+    console.log(this.transfMatrix)
     mat4.translate(this.transfMatrix, this.transfMatrix, v);
+    console.log(this.transfMatrix)
   }
 
   escalar(ex, ey, ez){
@@ -48,7 +51,16 @@ class TTransformacion extends TEntidad{
   beginDraw(){
     this.stack.push(this.modelMatrix);
     //mat4.multiply(out, a, b);
-    mat4.multiply(this.modelMatrix, this.modelMatrix, this.transfMatrix);
+    //mat4.multiply(this.modelMatrix, this.modelMatrix, this.transfMatrix);
+    console.log(this.transfMatrix);
+    let aux = this.modelMatrix;
+    mat4.multiply(this.modelMatrix, aux, this.transfMatrix);
+    //GModelMatrix=this.modelMatrix;
+    console.log(this.modelMatrix);
+    GModelMatrix = this.modelMatrix;
+    console.log('--------------------------------------------------');
+    console.log(GModelMatrix);
+    console.log(this.transfMatrix);
   }
 
   endDraw(){
