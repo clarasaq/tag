@@ -39,7 +39,9 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
-    trasla.entidad.trasladar(20000000,20,20);
+    //trasla.entidad.trasladar(1,0,0);
+    GProjectionMatrix = trasla.entidad.modelMatrix;
+    console.log(GProjectionMatrix);
     return cam;
   }
   activarCamara(camara){
@@ -73,15 +75,16 @@ class TFachadaMotor {
     console.log('**************************************');
     console.log(this.regLuces);
     console.log(this.regLuces[0].entidad.modelMatrix);
-    GPositionLuz = this.regLuces[0].entidad.modelMatrix;
+    //GPositionLuz = this.regLuces[0].entidad.modelMatrix;
   	return nodo;
   }
   crearLuzCompleto(nombre){
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
-    trasla.entidad.trasladar(20000000,20,20);
-
+    trasla.entidad.trasladar(1,0,0);
+    GPositionLuz = trasla.entidad.modelMatrix;
+    console.log(GPositionLuz);
 
     return luz;
   }
@@ -122,13 +125,14 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
-
+    trasla.entidad.trasladar(20,1,1);
     //Guaro las matrices de forma global para obtenerlas en el shader
     GlobalMalla = malla;
     GMaterial = malla.material;
-    // GModelMatrix=GlobalMalla.modelMatrix;
+    GModelMatrix=malla.modelMatrix;
+    console.log(GModelMatrix);
     GViewMatrix= GlobalMalla.viewMatrix;
-    GProjectionMatrix = GlobalMalla.projectionMatrix
+    //GProjectionMatrix = GlobalMalla.projectionMatrix
     //Guardo los valores del material para mandarlos al shader
     GDifuso = GMaterial.colorDifuso;
     GAmbiental = GMaterial.colorAmbiente;

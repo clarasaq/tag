@@ -25,7 +25,6 @@ class TShader extends TRecurso {
   }
 
   cargarFichero(nombre){
-    console.log('Cargar el fichero');
     var canvas = document.getElementById('canvas');
     var gl = this.initWebGL(canvas);
     let req = new XMLHttpRequest();
@@ -34,8 +33,6 @@ class TShader extends TRecurso {
 
     req.open('GET', nombre, false);
     req.send();
-    console.log(ext);
-    console.log(req.status);
     if(req.status == 200){
       if(ext == 'vert'){
         //Vertex Shader
@@ -90,7 +87,6 @@ loadShaders(vertices, indices, normales){
   gl.attachShader(programa,vertShader);
   gl.attachShader(programa, fragShader);
   gl.linkProgram(programa);
-  console.log(programa)
 
 //Creo los buffers
 
@@ -121,11 +117,13 @@ gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(coord);
 
 //NORMAL
-var sNormal = gl.getAttribLocation(programa, "Normal");
+//var sNormal = gl.getAttribLocation(programa, "Normal");
 //gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
-gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, false, 0, 0);
-gl.enableVertexAttribArray(sNormal);
+//gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, false, 0, 0);
+//gl.enableVertexAttribArray(sNormal);
 
+var SNormalMatrix = gl.getUniformLocation(programa, "NormalMatrix");
+gl.uniformMatrix4fv(SNormalMatrix,gl.FALSE,normales);
 
 //Le paso las matrices al shader
 
@@ -142,7 +140,7 @@ var SModelViewMatrix = gl.getUniformLocation(programa, "ModelViewMatrix");
 gl.uniformMatrix4fv(SModelViewMatrix,gl.False,GModelViewMatrix);
 
 //ProjectionMatrix
-//console.log(GProjectionMatrix);
+console.log(GProjectionMatrix);
 
 
 var SProjectionMatrix = gl.getUniformLocation(programa, "ProjectionMatrix");
@@ -164,13 +162,12 @@ gl.uniformMatrix4fv(sMVP, gl.FALSE,gMVP);
 
 //Paso las componentes del material
 //COMPONENTE DIFUSA
-console.log('/////////////////////////////')
-console.log(GDifuso);
+//console.log(GDifuso);
 var SDifusa = gl.getUniformLocation(programa, "Kd");
 gl.uniform3fv(SDifusa, GDifuso);
 
 //COMPONENTE AMBIENTAL
-console.log(GAmbiental);
+//console.log(GAmbiental);
 var SAmbiental = gl.getUniformLocation(programa, "Ka");
 gl.uniform3fv(SAmbiental, GAmbiental);
 
@@ -183,28 +180,21 @@ gl.uniform3fv(SEspecular, GEspecular);
 var SBrillo = gl.getUniformLocation(programa, "Shininess");
 gl.uniform1f(SBrillo, GBrillo);
 
-//FRAGCOLOR
-var color = gl.getUniformLocation(programa, "color");
-var aux= [0.7,0.2,0.7,1.0];
-console.log(GFragColor);
-gl.uniform4fv(color,aux);
+
 
 //LIGTHPOSITION
 //console.log(auxPosition);
+console.log(GPositionLuz);
  var SPosicionLuz = gl.getUniformLocation(programa, "LightPosition");
+ //var auxPos = []
 gl.uniform4fv(SPosicionLuz, GPositionLuz);
 
 
  //LIGTHINTENSITY
- var auxLuz = [1,1,1];
+ var auxLuz = [0.9,0.9,0.9];
 var SIntensidad = gl.getUniformLocation(programa, "LightIntensity");
 //gl.uniform3fv = gl.uniform3fv(SIntensidad, GIntensidadLuz);
 gl.uniform3fv = gl.uniform3fv(SIntensidad, auxLuz);
-
-
-
-
-
 
 /*=========Drawing the triangle===========*/
 
@@ -212,92 +202,6 @@ gl.viewport(0,0,canvas.width,canvas.height);
 //gl.drawElements(Mode, Count, Type, Offset)
 gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 // gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT,0);
-/*
-//Crear buffers para Vertices, indicies, normales
-
-  // Create an empty buffer object to store vertex buffer
-  var vertex_buffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-  //gl.bindBuffer(gl.ARRAY_BUFFER, null); //unbind -> desatar
-  // Create an empty buffer object to store Index buffer
-  var Index_Buffer = gl.createBuffer();
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
-  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-  //gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
-
-  var Normal_Buffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, Normal_Buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normales), gl.STATIC_DRAW);
-
-//AÑADO valores a los parameteros de los shaders
-
-//VertexPosition
-
-//El de vertices => Asognar los vertices al shader
-  //gl.bindBuffer(gl.ARRAY_BUFFER, susanPosVertexBufferObject);
-  	var vertexPosition = gl.getAttribLocation(programa, 'VertexPosition');
-  	gl.vertexAttribPointer(
-  		vertexPosition, // Attribute location
-  		3, // Number of elements per attribute
-  		gl.FLOAT, // Type of elements
-  		gl.FALSE,
-  		3 , // Size of an individual vertex
-  		0 // Offset from the beginning of a single vertex to this attribute
-  	);
-  	gl.enableVertexAttribArray(vertexPosition);
-
-//VertexNormal
-//El de normales
-var vertexNormal = gl.getAttribLocation(programa, 'VertexNormal');
-gl.vertexAttribPointer(vertexNormal, 3, gl.FLOAT, gl.TRUE,indices.length, 0);
-gl.enableVertexAttribArray(vertexNormal);
-
-
-//Matrices del VertexShader
-var SModelViewMatrix = gl.getUniformLocation(programa, 'ModelViewMatrix');
-var SProjectionMatrix = gl.getUniformLocation(programa, 'ProjectionMatrix');
-var Smvp = gl.getUniformLocation(programa, 'MVP');
-
-gl.uniformMatrix4fv(SModelViewMatrix,gl.FALSE, GModelViewMatrix);
-gl.uniformMatrix4fv(SProjectionMatrix, gl.FALSE, GProjectionMatrix);
-gl.uniformMatrix4fv(gMVP, gl.FALSE, projMatrix);
-
-
-
-
-  //gl.useProgram(this.shaderProgram);
-  gl.useProgram(programa);
-
-  //Tipo uniform
-  //this.shaderProgram.FragColor = gl.getUniformLocation(this.shaderProgram, 'FragColor');
-  //programa = gl.getUniformLocation(programa, 'FragColor');
-  //gl.uniform4fv(this.shaderProgram.FragColor, [0,1,0,1.0]);
-  //gl.uniform4fv(programa, [0,1,0,1.0]);
-  //Tipo attribute
-  // this.shaderProgram.VertexPosition = gl.getAttribLocation(this.shaderProgram, 'VertexPosition');
-  // gl.enableVertexAttribArray(this.shaderProgram.VertexPosition);
-  // gl.vertexAttribPointer(this.shaderProgram.VertexPosition, 3, gl.FLOAT, false, 0,0);
-
-
-  /*======= Associating shaders to buffer objects =======*/
-
-//  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer); // Bind vertex buffer object
-  //gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);  // Bind index buffer object
-
-  // Get the attribute location
- //var coord = gl.getAttribLocation(shaderProgram, "coordinates");
- //var coord = gl.getAttribLocation(this.getShaderProgram(), "VertexNormal");
- //  console.log(prueba.getShaderProgram());
- //  var aux = prueba.getShaderProgram();
- //  var coord = gl.getAttribLocation(aux, "coordinates");
-
-
-//  gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
-
-  //gl.enableVertexAttribArray(coord);*/
-
-
 
 }
 

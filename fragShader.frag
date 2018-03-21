@@ -1,7 +1,7 @@
 #version 100
 precision mediump float;
 
-vec3 coordinates; //VERTICES EN COORDINADAS DE VISTA
+vec3 Position; //VERTICES EN COORDINADAS DE VISTA
 vec3 Normal; //NORMAL EN COORDENADAS DE VISTA
 
 uniform vec4 color;
@@ -20,13 +20,12 @@ vec4 FragColor;
 // FUNCION QUE CALCULA EL MODELO DE PHONG
 vec3 Phong () {
 	vec3 n = normalize (Normal);
-	vec3 s = normalize (vec3 (LightPosition) - coordinates);
-	vec3 v = normalize (vec3 (-coordinates));
+	vec3 s = normalize (vec3 (LightPosition) - Position);
+	vec3 v = normalize (vec3 (-Position));
 	vec3 r = reflect (-s, n);
-	vec3 light = LightIntensity * (Ka + Kd * max (dot (s, n), 0.0) + Ks *
-	pow (max (dot (r,v), 0.0), Shininess));
-	//vec3 light =  LightIntensity * (Ka );
-
+	// vec3 light = LightIntensity * (Ka + Kd * max (dot (s, n), 0.0) + Ks *
+	// pow (max (dot (r,v), 0.0), Shininess));
+	vec3 light = LightIntensity * (Ka + Kd * max (dot (s, n), 0.0) + Ks * pow (max (dot (r,v), 0.0), Shininess));
 	return light;
 }
 

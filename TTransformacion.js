@@ -57,7 +57,6 @@ class TTransformacion extends TEntidad{
     mat4.multiply(this.modelMatrix, aux, this.transfMatrix);
     //GModelMatrix=this.modelMatrix;
     console.log(this.modelMatrix);
-    GModelMatrix = this.modelMatrix;
     console.log('--------------------------------------------------');
     console.log(GModelMatrix);
     console.log(this.transfMatrix);
