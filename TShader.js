@@ -117,13 +117,10 @@ gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(coord);
 
 //NORMAL
-//var sNormal = gl.getAttribLocation(programa, "Normal");
-//gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
-//gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, false, 0, 0);
-//gl.enableVertexAttribArray(sNormal);
+var sNormal = gl.getAttribLocation(programa, "VertexNormal");
+gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(sNormal);
 
-var SNormalMatrix = gl.getUniformLocation(programa, "NormalMatrix");
-gl.uniformMatrix4fv(SNormalMatrix,gl.FALSE,normales);
 
 //Le paso las matrices al shader
 
@@ -134,11 +131,18 @@ GModelViewMatrix = mat4.create();
 console.log(GViewMatrix);
 console.log(GModelMatrix);
 mat4.multiply(GModelViewMatrix, GModelMatrix, GViewMatrix );
-//console.log(GModelViewMatrix);
+console.log(GModelViewMatrix);
 //ModelViewMatrix
 var SModelViewMatrix = gl.getUniformLocation(programa, "ModelViewMatrix");
 gl.uniformMatrix4fv(SModelViewMatrix,gl.False,GModelViewMatrix);
 
+//NormalMatrix
+GNormalMatrix = mat4.create();
+mat4.invert(GNormalMatrix, GModelViewMatrix);
+mat4.transpose(GNormalMatrix, GNormalMatrix);
+//console.log(GNormalMatrix);
+var SNormalMatrix = gl.getUniformLocation(programa, "NormalMatrix");
+gl.uniformMatrix4fv(SNormalMatrix,gl.FALSE,GNormalMatrix);
 //ProjectionMatrix
 console.log(GProjectionMatrix);
 
