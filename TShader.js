@@ -102,9 +102,11 @@ gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW)
 gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
 var Normal_Buffer = gl.createBuffer();
-gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Normal_Buffer);
-gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(normales), gl.STATIC_DRAW);
-gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+gl.bindBuffer(gl.ARRAY_BUFFER, Normal_Buffer);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normales), gl.STATIC_DRAW);
+gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+console.log(Normal_Buffer);
 
 
 gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer); // Bind vertex buffer object
@@ -113,17 +115,15 @@ gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);  // Bind index buffer obje
 gl.useProgram(programa);
 // Get the attribute location
 var coord = gl.getAttribLocation(programa, "coordinates");
-gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
+gl.vertexAttribPointer(coord, 3, gl.FLOAT, gl.FALSE, 0, 0);
 gl.enableVertexAttribArray(coord);
 
+gl.bindBuffer(gl.ARRAY_BUFFER, Normal_Buffer);
 //NORMAL
-//var sNormal = gl.getAttribLocation(programa, "Normal");
-//gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
-//gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, false, 0, 0);
-//gl.enableVertexAttribArray(sNormal);
+var sNormal = gl.getAttribLocation(programa, "VertexNormal");
+gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, gl.FALSE, 0, 0);
+gl.enableVertexAttribArray(sNormal);
 
-var SNormalMatrix = gl.getUniformLocation(programa, "NormalMatrix");
-gl.uniformMatrix4fv(SNormalMatrix,gl.FALSE,normales);
 
 //Le paso las matrices al shader
 
@@ -134,11 +134,18 @@ GModelViewMatrix = mat4.create();
 console.log(GViewMatrix);
 console.log(GModelMatrix);
 mat4.multiply(GModelViewMatrix, GModelMatrix, GViewMatrix );
-//console.log(GModelViewMatrix);
+console.log(GModelViewMatrix);
 //ModelViewMatrix
 var SModelViewMatrix = gl.getUniformLocation(programa, "ModelViewMatrix");
-gl.uniformMatrix4fv(SModelViewMatrix,gl.False,GModelViewMatrix);
+gl.uniformMatrix4fv(SModelViewMatrix,gl.FALSE,GModelViewMatrix);
 
+//NormalMatrix
+GNormalMatrix = mat4.create();
+mat4.invert(GNormalMatrix, GModelViewMatrix);
+mat4.transpose(GNormalMatrix, GNormalMatrix);
+//console.log(GNormalMatrix);
+var SNormalMatrix = gl.getUniformLocation(programa, "NormalMatrix");
+gl.uniformMatrix4fv(SNormalMatrix,gl.FALSE,GNormalMatrix);
 //ProjectionMatrix
 console.log(GProjectionMatrix);
 
