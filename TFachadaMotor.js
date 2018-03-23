@@ -39,7 +39,7 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
-    //trasla.entidad.trasladar(1,0,0);
+    trasla.entidad.trasladar(1,0,0);
     GProjectionMatrix = trasla.entidad.modelMatrix;
     console.log(GProjectionMatrix);
     return cam;
@@ -82,7 +82,7 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
-    trasla.entidad.trasladar(1,0,0);
+    trasla.entidad.trasladar(0,10,0);
     GPositionLuz = trasla.entidad.modelMatrix;
     console.log(GPositionLuz);
 
@@ -125,13 +125,14 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
-    trasla.entidad.trasladar(20,1,1);
+    trasla.entidad.trasladar(-1,0,0);
     //Guaro las matrices de forma global para obtenerlas en el shader
     GlobalMalla = malla;
     GMaterial = malla.material;
-    GModelMatrix=malla.modelMatrix;
+    GModelMatrix=trasla.entidad.modelMatrix;
     console.log(GModelMatrix);
-    GViewMatrix= GlobalMalla.viewMatrix;
+    GViewMatrix= trasla.entidad.viewMatrix;
+    console.log(GViewMatrix);
     //GProjectionMatrix = GlobalMalla.projectionMatrix
     //Guardo los valores del material para mandarlos al shader
     GDifuso = GMaterial.colorDifuso;
