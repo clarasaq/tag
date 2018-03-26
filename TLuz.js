@@ -5,9 +5,9 @@ class TLuz extends TEntidad{
     //this.intensidad = new TColor();
 
     this.emitida = [0.0,0.0,0.0,0.0];
-  	this.ambiente = [0.0,0.0,0.0,0.0];
-  	this.especular = [0.0,0.0,0.0,0.0];
-  	this.difusa = [0.0,0.0,0.0,0.0];
+  	this.ambiente = [0.0,0.0,0.0];
+  	this.especular = [0.0,0.0,0.0];
+  	this.difusa = [0.0,0.0,0.0];
   }
 
 

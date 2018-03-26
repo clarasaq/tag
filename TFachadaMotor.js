@@ -34,7 +34,7 @@ class TFachadaMotor {
   	nodo.setEntidad(camara);
     this.regCamaras.push(nodo);
     //fovy, aspect, near, far - angulo en radianes, aspecto, cerca, lejos
-    camara.setPerspectiva(45, 1.333, 0, 100);
+    // camara.setPerspectiva(1.5708, 1.333, 0, 100);
   	return camara;
   }
   crearCamaraCompleto(nombre){
@@ -123,7 +123,7 @@ class TFachadaMotor {
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
     trasla.entidad.trasladar(-1,0,0);
-    rota.entidad.rotar(1,5708, 0, 1, 0);
+    // rota.entidad.rotar(1.5708, 0, 1, 0);
 
     //Guaro las matrices de forma global para obtenerlas en el shader
     //GlobalMalla = malla;

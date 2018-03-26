@@ -113,13 +113,13 @@ class TShader extends TRecurso {
     gl.useProgram(programa);
     // Get the attribute location
     var coord = gl.getAttribLocation(programa, "coordinates");
-    gl.vertexAttribPointer(coord, 3, gl.FLOAT, gl.FALSE, 0, 0);
+    gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(coord);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, Normal_Buffer);
     //NORMAL
     var sNormal = gl.getAttribLocation(programa, "VertexNormal");
-    gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, gl.FALSE, 0, 0);
+    gl.vertexAttribPointer(sNormal, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(sNormal);
 
     console.log('coordinates: ????');
@@ -130,18 +130,18 @@ class TShader extends TRecurso {
     GModelViewMatrix = mat4.create();
     mat4.multiply(GModelViewMatrix, GModelMatrix, GViewMatrix );
     var SModelViewMatrix = gl.getUniformLocation(programa, "ModelViewMatrix");
-    gl.uniformMatrix4fv(SModelViewMatrix,gl.FALSE,GModelViewMatrix);
+    gl.uniformMatrix4fv(SModelViewMatrix, false, GModelViewMatrix);
 
     //NormalMatrix
     GNormalMatrix = mat4.create();
     mat4.invert(GNormalMatrix, GModelViewMatrix);
     mat4.transpose(GNormalMatrix, GNormalMatrix);
     var SNormalMatrix = gl.getUniformLocation(programa, "NormalMatrix");
-    gl.uniformMatrix4fv(SNormalMatrix,gl.FALSE,GNormalMatrix);
+    gl.uniformMatrix4fv(SNormalMatrix, false, GNormalMatrix);
 
     //ProjectionMatrix
     var SProjectionMatrix = gl.getUniformLocation(programa, "ProjectionMatrix");
-    gl.uniformMatrix4fv(SProjectionMatrix, gl.FALSE, GProjectionMatrix);
+    gl.uniformMatrix4fv(SProjectionMatrix, false, GProjectionMatrix);
 
     console.log('GModelMatrix: ' + GModelMatrix);
     console.log('GViewMatrix: ' + GViewMatrix);
@@ -153,7 +153,7 @@ class TShader extends TRecurso {
     gMVP = mat4.create();
     mat4.multiply(gMVP, GModelViewMatrix, GProjectionMatrix);
     var sMVP = gl.getUniformLocation(programa, "MVP");
-    gl.uniformMatrix4fv(sMVP, gl.FALSE,gMVP);
+    gl.uniformMatrix4fv(sMVP, false, gMVP);
 
     console.log('gMVP: ' + gMVP);
 
@@ -184,11 +184,12 @@ class TShader extends TRecurso {
 
     //LIGTHINTENSITY
     var SIntensidad = gl.getUniformLocation(programa, "LightIntensity");
-    gl.uniform3fv = gl.uniform3fv(SIntensidad, GIntensidadLuz);
+    gl.uniform3fv(SIntensidad, GIntensidadLuz);
     console.log('GIntensidadLuz: ' + GIntensidadLuz);
 
     //Drawing
     gl.viewport(0,0,canvas.width,canvas.height);
+
     //gl.drawElements(Mode, Count, Type, Offset)
     gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
     // gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT,0);
