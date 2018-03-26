@@ -1,0 +1,8 @@
+class TColor{
+
+  constructor(){
+
+  }
+
+
+}
