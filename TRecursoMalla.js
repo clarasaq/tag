@@ -41,7 +41,7 @@ class TRecursoMalla extends TRecurso{
       // let normales = json.model.meshes[0].vertElement.normals;
       // this.normales = normales;
       //
-      // let indices = json.model.meshes[0].face.vertElementIndices;
+      // let indices = json.model.meshes[0].vertElement.vertIndices;
       // this.indices = indices;
     }
   }

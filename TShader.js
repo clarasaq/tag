@@ -178,9 +178,12 @@ class TShader extends TRecurso {
     console.log('GBrillo: ' + GBrillo);
 
     //LIGTHPOSITION
+    let luz = vec4.create();
+    mat4.multiply(luz, GPositionLuz, [1,1,1,1]);
     var SPosicionLuz = gl.getUniformLocation(programa, "LightPosition");
-    gl.uniform4fv(SPosicionLuz, GPositionLuz);
+    gl.uniform4fv(SPosicionLuz, luz);
     console.log('GPositionLuz: ' + GPositionLuz);
+    console.log('luz: ' + luz);
 
     //LIGTHINTENSITY
     var SIntensidad = gl.getUniformLocation(programa, "LightIntensity");
@@ -191,8 +194,8 @@ class TShader extends TRecurso {
     gl.viewport(0,0,canvas.width,canvas.height);
 
     //gl.drawElements(Mode, Count, Type, Offset)
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-    // gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT,0);
+    gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT, 0);
+    // gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
 
   }
 

@@ -41,8 +41,8 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
-    // rota.entidad.rotar(1,5708, 0, 1, 0);
-    trasla.entidad.trasladar(1,0,0);
+    rota.entidad.rotar(0.785398, 1, 0, 0);
+    trasla.entidad.trasladar(0,0,0);
     GViewMatrix = trasla.entidad.modelMatrix;
     GProjectionMatrix = cam.getProjectionMatrix();
     return cam;
@@ -81,7 +81,7 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
-    trasla.entidad.trasladar(0,10,0);
+    // trasla.entidad.trasladar(0,10,0);
     GPositionLuz = trasla.entidad.modelMatrix;
     return luz;
   }
@@ -122,8 +122,8 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
-    trasla.entidad.trasladar(-1,0,0);
-    // rota.entidad.rotar(1.5708, 0, 1, 0);
+    // trasla.entidad.trasladar(-1,0,0);
+    // rota.entidad.rotar(0.785398, 0, 1, 0);
 
     //Guaro las matrices de forma global para obtenerlas en el shader
     //GlobalMalla = malla;
