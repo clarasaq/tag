@@ -24,3 +24,10 @@ var GIntensidadLuz;
 var GModelViewMatrix=null;//Matrz de modelo y vista multiplicadas
 
 var gMVP =null;
+
+var stack = [];
+var GVertices;
+var GIndices;
+var GNormales;
+
+var Ggl = null;

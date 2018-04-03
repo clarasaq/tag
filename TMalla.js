@@ -12,7 +12,6 @@ class TMalla extends TEntidad{
   }
 
   beginDraw(){
-    console.log("Model Matrix:" +this.modelMatrix);
     this.malla.draw();
   }
 

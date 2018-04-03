@@ -13,7 +13,6 @@ class TNodo {
 
   addHijo(hijo){
     this.hijos.push(hijo);
-    //tenemos que apuntar al padre
   }
 
   removeHijos(){
@@ -48,8 +47,6 @@ class TNodo {
   }
 
   draw(){
-    console.log(this.nombre + " beginDraw");
-
     if(this.entidad != null){
       this.entidad.beginDraw();
     }
@@ -61,7 +58,5 @@ class TNodo {
     if(this.entidad != null){
       this.entidad.endDraw();
     }
-
-    console.log(this.nombre + " endDraw");
   }
 }

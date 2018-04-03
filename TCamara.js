@@ -7,9 +7,9 @@ class TCamara extends TEntidad {
 		this.lejano = null;//Float
 	}
 
-	//fovy =>Angulo de vision en radianes
+	//fovy => Angulo de vision en radianes
 	//aspect => Relacion de aspecto
-	setPerspectiva (near, far, fovy, aspect){
+	setPerspectiva (fovy, aspect, near, far){
 		this.esPrespectiva = true;
 		let out = mat4.create();
 		mat4.perspective(out, fovy, aspect, near, far)

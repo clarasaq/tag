@@ -32,7 +32,6 @@ class TRecursoTextura extends TRecurso{
       //creamos una imagen para asociarla a la textura
       textura.image = new Image();
       textura.image.onload = function() {
-        console.log("Procedo a cargar la textura");
         self.handleLoadedTexture(textura);
       }
       textura.image.src = nombre;
@@ -54,12 +53,10 @@ class TRecursoTextura extends TRecurso{
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     //se pone a null para dejar la variable libre para otras texturas
     gl.bindTexture(gl.TEXTURE_2D, null);
-    console.log("Textura cargada");
   }
 
   draw(){
     var canvas = document.getElementById('canvas');
-    console.log('Estamos en TRecursoMalla y hacemos draw');
     var gl = this.initWebGL(canvas);
     var cubeVertexTextureCoordBuffer;
     cubeVertexTextureCoordBuffer = gl.createBuffer();

@@ -27,21 +27,24 @@ class TFachadaMotor {
     return trans;
   }
 
-//---- Camara ----//
+  //---- Camara ----//
   crearCamara(nombre, padre){
     let nodo = new TNodo(nombre, padre);
   	let camara = new TCamara();
   	nodo.setEntidad(camara);
     this.regCamaras.push(nodo);
-  	return nodo;
+    //fovy, aspect, near, far - angulo en radianes, aspecto, cerca, lejos
+    // camara.setPerspectiva(1.5708, 1.333, 0, 100);
+  	return camara;
   }
   crearCamaraCompleto(nombre){
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
-    trasla.entidad.trasladar(1,0,0);
-    GProjectionMatrix = trasla.entidad.modelMatrix;
-    console.log(GProjectionMatrix);
+    rota.entidad.rotar(0.785398, 1, 0, 0);
+    trasla.entidad.trasladar(0,0,0);
+    GViewMatrix = trasla.entidad.modelMatrix;
+    GProjectionMatrix = cam.getProjectionMatrix();
     return cam;
   }
   activarCamara(camara){
@@ -66,26 +69,20 @@ class TFachadaMotor {
     }
   }
 
-//---- luz ----//
+  //---- luz ----//
   crearLuz(nombre, padre){
     let nodo = new TNodo(nombre, padre);
   	let luz = new TLuz();
   	nodo.setEntidad(luz);
     this.regLuces.push(nodo);
-    console.log('**************************************');
-    console.log(this.regLuces);
-    console.log(this.regLuces[0].entidad.modelMatrix);
-    //GPositionLuz = this.regLuces[0].entidad.modelMatrix;
   	return nodo;
   }
   crearLuzCompleto(nombre){
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
-    trasla.entidad.trasladar(0,10,0);
+    // trasla.entidad.trasladar(0,10,0);
     GPositionLuz = trasla.entidad.modelMatrix;
-    console.log(GPositionLuz);
-
     return luz;
   }
   activarLuz(luz){
@@ -111,7 +108,7 @@ class TFachadaMotor {
     }
   }
 
-//---- Malla ----//
+  //---- Malla ----//
   crearMalla(nombre, ficheroMalla, ficheroMaterial, ficheroTextura, padre){
     let nodo = new TNodo(nombre, padre);
     let entMalla = new TMalla();
@@ -122,34 +119,35 @@ class TFachadaMotor {
     return entMalla;
   }
   crearMallaCompleto(nombre, ficheroMalla, ficheroMaterial, ficheroTextura){
-    let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
+    let escala = this.crearNodo("EscalaMalla", this.escena, this.crearTransform());
+    let rota = this.crearNodo("RotaMalla", escala, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
-    trasla.entidad.trasladar(-1,0,0);
+    // escala.entidad.escalar(0.25, 0.25, 0.25);
+    // trasla.entidad.trasladar(-1,0,0);
+    // rota.entidad.rotar(0.785398, 0, 1, 0);
+
     //Guaro las matrices de forma global para obtenerlas en el shader
-    GlobalMalla = malla;
+    //GlobalMalla = malla;
     GMaterial = malla.material;
-    GModelMatrix=trasla.entidad.modelMatrix;
-    console.log(GModelMatrix);
-    GViewMatrix= trasla.entidad.viewMatrix;
-    console.log(GViewMatrix);
-    //GProjectionMatrix = GlobalMalla.projectionMatrix
+    GModelMatrix = trasla.entidad.modelMatrix;
+
     //Guardo los valores del material para mandarlos al shader
-    GDifuso = GMaterial.colorDifuso;
-    GAmbiental = GMaterial.colorAmbiente;
-    GEspecular = GMaterial.colorEpecular;
-    GFragColor = GMaterial.frag_color;
-    GBrillo = GMaterial.iluminacion;
-    GIntensidadLuz = GMaterial.vertexColor;
-    console.log('***********************************************')
-    console.log(GIntensidadLuz)
-    /*console.log('Model Matrix');
-    console.log(GModelMatrix);
-    console.log('View Matrix');
-    console.log(GViewMatrix)*/
-    console.log(malla.material);
-    /*console.log(GlobalMalla);*/
+    GDifuso = malla.material.colorDifuso;
+    GAmbiental = malla.material.colorAmbiente;
+    GEspecular = malla.material.colorEpecular;
+    GFragColor = malla.material.frag_color;
+    GBrillo = malla.material.iluminacion;
+    GIntensidadLuz = malla.material.vertexColor;
+
     return malla;
+  }
+
+  crearShader(frag, vert){
+    let shader = new TShader();
+    shader.cargarFichero(frag);
+    shader.cargarFichero(vert);
+    return shader;
   }
 
   getCamaras(){

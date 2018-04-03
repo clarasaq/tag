@@ -16,8 +16,6 @@ class TRecursoMaterial extends TRecurso{
   cargarFichero(nombre){
     /*Parsear el fichero
     require "json"*/
-    console.log("Entramos en la carga de fichero MATERIAL caca");
-
     let req = new XMLHttpRequest();
     req.open('GET', nombre, false);
     req.send();
@@ -59,7 +57,6 @@ class TRecursoMaterial extends TRecurso{
       this.vertexColor = color;
       //le paso las 3 coordenadas de la suma de los colores y la transparencia
       this.frag_color = vec4.fromValues(color[0], color[1], color[2], this.transparencia);
-      console.log(this.frag_color);
     }
   }
 
