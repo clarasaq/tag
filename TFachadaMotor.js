@@ -123,21 +123,14 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaMalla", escala, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
-<<<<<<< HEAD
     // escala.entidad.escalar(0.25, 0.25, 0.25);
-=======
->>>>>>> 111eb9eecd25cab5de4608772a791389548f4a5b
     // trasla.entidad.trasladar(-1,0,0);
     // rota.entidad.rotar(0.785398, 0, 1, 0);
 
     //Guaro las matrices de forma global para obtenerlas en el shader
     //GlobalMalla = malla;
     GMaterial = malla.material;
-<<<<<<< HEAD
-    GModelMatrix = trasla.entidad.modelMatrix;
-=======
     GModelMatrix=trasla.entidad.modelMatrix;
->>>>>>> 111eb9eecd25cab5de4608772a791389548f4a5b
 
     //Guardo los valores del material para mandarlos al shader
     GDifuso = malla.material.colorDifuso;
@@ -146,11 +139,7 @@ class TFachadaMotor {
     GFragColor = malla.material.frag_color;
     GBrillo = malla.material.iluminacion;
     GIntensidadLuz = malla.material.vertexColor;
-<<<<<<< HEAD
-
     return malla;
-=======
-    return null;
   }
 
   crearShader(frag, vert){
@@ -158,7 +147,6 @@ class TFachadaMotor {
     shader.cargarFichero(frag);
     shader.cargarFichero(vert);
     return shader;
->>>>>>> 111eb9eecd25cab5de4608772a791389548f4a5b
   }
 
   crearShader(frag, vert){
