@@ -30,6 +30,7 @@ class TShader extends TRecurso {
     let vertices = GVertices;
     let indices = GIndices;
     let normales = GNormales;
+<<<<<<< HEAD
     let gl = Ggl;
     //Compilo los dos shaders
 
@@ -42,6 +43,22 @@ class TShader extends TRecurso {
 
     var error = gl.getShaderInfoLog(vertShader);
 
+=======
+
+    var canvas = document.getElementById('canvas');
+    var gl = this.initWebGL(canvas);
+    //Compilo los dos shaders
+
+    //Vertex Shader
+    // console.log(this.VertexShader);
+    var vertShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertShader, this.VertexShader);
+    // console.log(this.VertexShader);
+    gl.compileShader(vertShader);
+
+    var error = gl.getShaderInfoLog(vertShader);
+
+>>>>>>> 111eb9eecd25cab5de4608772a791389548f4a5b
     if (error.length > 0) {
       console.log(error)
     }
@@ -63,6 +80,10 @@ class TShader extends TRecurso {
     gl.linkProgram(programa);
 
     //Creo los buffers
+<<<<<<< HEAD
+=======
+
+>>>>>>> 111eb9eecd25cab5de4608772a791389548f4a5b
     var vertex_buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);

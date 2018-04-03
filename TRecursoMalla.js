@@ -26,6 +26,7 @@ class TRecursoMalla extends TRecurso{
       let json = JSON.parse(req.response);
       console.log(json);
 
+<<<<<<< HEAD
       // let vertices = json.data.attributes.position.array;
       // this.vertices = vertices;
       //
@@ -51,5 +52,31 @@ class TRecursoMalla extends TRecurso{
 
   draw(){
 
+=======
+      let vertices = json.data.attributes.position.array;
+      this.vertices = vertices;
+
+      let normales = json.data.attributes.normal.array;
+      this.normales = normales;
+
+      let indices = json.data.index.array;
+      this.indices = indices;
+
+      // let vertices = json.model.meshes[0].verts;
+      // this.vertices = vertices;
+      //
+      // let normales = json.model.meshes[0].vertElement.normals;
+      // this.normales = normales;
+      //
+      // let indices = json.model.meshes[0].vertElement.vertIndices;
+      // this.indices = indices;
+    }
+  }
+
+  draw(){
+    GVertices = this.vertices;
+    GIndices = this.indices;
+    GNormales = this.normales;
+>>>>>>> 111eb9eecd25cab5de4608772a791389548f4a5b
   }
 }

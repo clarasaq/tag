@@ -15,6 +15,7 @@ class MainF{
     fachada.draw();
   }
 
+<<<<<<< HEAD
   initWebGL(canvas) {
     var gl = null;
 
@@ -31,5 +32,12 @@ class MainF{
     }
 
     return gl;
+=======
+    let vagina = fachada.crearMallaCompleto("Vagina", "cube-mr.json", "box.mtl", "textura.jpg");
+    let shader = fachada.crearShader('fragShader.frag', 'vertShader.vert');
+
+    fachada.draw();
+    shader.loadShaders();
+>>>>>>> 111eb9eecd25cab5de4608772a791389548f4a5b
   }
 }
