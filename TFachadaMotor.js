@@ -6,8 +6,6 @@ class TFachadaMotor {
     //Registros objetos
     this.regLuces = new Array();
     this.regCamaras = new Array();
-    this.regCamarasActivas = new Array();
-    this.regLucesActivas = new Array();
   }
 
   crearNodo(nombre, padre, entidad){
@@ -25,6 +23,14 @@ class TFachadaMotor {
   crearTransform(){
     let trans = new TTransformacion();
     return trans;
+  }
+  rotar(nodo, rad, axis1, axis2, axis3){
+    let nodoRota = nodo.getPadre().getPadre();
+    nodoRota.entidad.rotar(rad, axis1, axis2, axis3);
+  }
+  trasladar(nodo,tx, ty, tz){
+    let nodoTrasla = nodo.getPadre();
+    nodoTrasla.entidad.trasladar(tx, ty, tz);
   }
 
   //---- Camara ----//
@@ -47,25 +53,10 @@ class TFachadaMotor {
     GProjectionMatrix = cam.getProjectionMatrix();
     return cam;
   }
-  activarCamara(camara){
-    for(let i=0; i<this.regCamaras.length; i++){
-      if (this.regCamaras[i] == camara){
-        this.regCamarasActivas[i] = 1;
-      }
-    }
-  }
-  desactivarCamara(camara){
-    for(let i=0; i<this.regCamaras.length; i++){
-      if (this.regCamaras[i] == camara){
-        this.regCamarasActivas[i] = 0;
-      }
-    }
-  }
   borrarCamaraCompleto(){
     for(let i=0; i<this.regCamaras.length; i++){
       this.escena.removeHijo(this.regCamaras[i].getPadre().getPadre());
       this.regCamaras[i] = 0;
-      this.regLucesActivas[i] = -1; // indico que no existe
     }
   }
 
@@ -85,26 +76,10 @@ class TFachadaMotor {
     GPositionLuz = trasla.entidad.modelMatrix;
     return luz;
   }
-  activarLuz(luz){
-    for(let i=0; i<this.regLuces.length; i++){
-      if (this.regLuces[i] == luz){
-        this.regLucesActivas[i] = 1;
-      }
-    }
-    console.log(luz);
-  }
-  desactivarLuz(luz){
-    for(let i=0; i<this.regLuces.length; i++){
-      if (this.regLuces[i] == luz){
-        this.regLucesActivas[i] = 0;
-      }
-    }
-  }
   borrarLuzCompleto(){
     for(let i=0; i<this.regLuces.length; i++){
       this.escena.removeHijo(this.regLuces[i].getPadre().getPadre());
       this.regLuces[i] = 0;
-      this.regLucesActivas[i] = -1;
     }
   }
 
@@ -162,13 +137,6 @@ class TFachadaMotor {
   getLuces(){
     return this.regLuces;
   }
-  getCamarasActivas(){
-    return this.regCamarasActivas;
-  }
-  getLucesActivas(){
-    return this.regLucesActivas;
-  }
-
   draw(){
     this.escena.draw();
   }
