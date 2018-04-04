@@ -26,11 +26,34 @@ class TShader extends TRecurso {
     }
   }
 
+  initWebGL(canvas) {
+    var gl = null;
+
+    try {
+      // Tratar de tomar el contexto estandar. Si falla, retornar al experimental.
+      gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    }
+    catch(e) {}
+
+    // Si no tenemos ningun contexto GL, date por vencido ahora
+    if (!gl) {
+      alert("Imposible inicializar WebGL. Tu navegador puede no soportarlo.");
+      gl = null;
+    }
+
+    return gl;
+    let shader = fachada.crearShader('fragShader.frag', 'vertShader.vert');
+
+    fachada.draw();
+    shader.loadShaders();
+  }
+
   loadShaders(){
     let vertices = GVertices;
     let indices = GIndices;
     let normales = GNormales;
-    let gl = Ggl;
+    var canvas = document.getElementById('canvas');
+    let gl = this.initWebGL(canvas);
     //Compilo los dos shaders
 
     //Vertex Shader
@@ -41,9 +64,6 @@ class TShader extends TRecurso {
     gl.compileShader(vertShader);
 
     var error = gl.getShaderInfoLog(vertShader);
-
-    var canvas = document.getElementById('canvas');
-    var gl = this.initWebGL(canvas);
     //Compilo los dos shaders
 
     //Vertex Shader

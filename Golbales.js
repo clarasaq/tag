@@ -29,5 +29,3 @@ var stack = [];
 var GVertices;
 var GIndices;
 var GNormales;
-
-var Ggl = null;
