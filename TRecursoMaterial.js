@@ -7,9 +7,7 @@ class TRecursoMaterial extends TRecurso{
     this.colorAmbiente;
     this.iluminacion;
     this.transparencia;
-    this.vertexColor;
-
-    this.frag_color;
+    this.intensidad;
   }
   //buscar estructura archivos .mtl leerlo y cargarlo como hacemos con la TRecursoMalla
   //almacenar color difuso, color especular, etc
@@ -53,10 +51,8 @@ class TRecursoMaterial extends TRecurso{
       //console.log(this.colorEpecular);
 
       //el frag_color es la suma de a, d, s y otr cosa que no se que es jeje
-      let color = vec3.fromValues(parseFloat(valoresKa[1])+parseFloat(valoresKd[1])+parseFloat(valoresKs[1]), parseFloat(valoresKa[2])+parseFloat(valoresKd[2])+parseFloat(valoresKs[2]), parseFloat(valoresKa[3])+parseFloat(valoresKd[3])+parseFloat(valoresKs[3]));
-      this.vertexColor = color;
+      this.intensidad = vec3.fromValues(1,1,1);
       //le paso las 3 coordenadas de la suma de los colores y la transparencia
-      this.frag_color = vec4.fromValues(color[0], color[1], color[2], this.transparencia);
     }
   }
 

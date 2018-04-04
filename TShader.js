@@ -194,8 +194,8 @@ class TShader extends TRecurso {
     gl.viewport(0,0,canvas.width,canvas.height);
 
     //gl.drawElements(Mode, Count, Type, Offset)
-    gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT, 0);
-    // gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
+    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+    // gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT,0);
 
   }
 

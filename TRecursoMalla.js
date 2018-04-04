@@ -16,6 +16,20 @@ class TRecursoMalla extends TRecurso{
   }
 
   cargarFichero(nombre){
+    let req = new XMLHttpRequest();
+    req.open('GET', nombre, false);
+    req.send();
+
+    if(req.status == 200){
+      let obj = new OBJ.Mesh(req.response);
+      console.log(obj);
+      this.vertices = obj.vertices;
+      this.normales = obj.vertexNormals;
+      this.indices = obj.indices;
+    }
+  }
+
+  cargarFicheroJSON(nombre){
     /*Parsear el fichero
     require "json"*/
     let req = new XMLHttpRequest();
@@ -26,23 +40,23 @@ class TRecursoMalla extends TRecurso{
       let json = JSON.parse(req.response);
       console.log(json);
 
-      let vertices = json.data.attributes.position.array;
-      this.vertices = vertices;
-
-      let normales = json.data.attributes.normal.array;
-      this.normales = normales;
-
-      let indices = json.data.index.array;
-      this.indices = indices;
-
-      // let vertices = json.model.meshes[0].verts;
+      // let vertices = json.data.attributes.position.array;
       // this.vertices = vertices;
       //
-      // let normales = json.model.meshes[0].vertElement.normals;
+      // let normales = json.data.attributes.normal.array;
       // this.normales = normales;
       //
-      // let indices = json.model.meshes[0].vertElement.vertIndices;
+      // let indices = json.data.index.array;
       // this.indices = indices;
+
+      let vertices = json.model.meshes[0].verts;
+      this.vertices = vertices;
+
+      let normales = json.model.meshes[0].vertElement.normals;
+      this.normales = normales;
+
+      let indices = json.model.meshes[0].vertElement.vertIndices;
+      this.indices = indices;
     }
   }
 

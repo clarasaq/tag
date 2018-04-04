@@ -34,15 +34,17 @@ class TFachadaMotor {
   	nodo.setEntidad(camara);
     this.regCamaras.push(nodo);
     //fovy, aspect, near, far - angulo en radianes, aspecto, cerca, lejos
-    // camara.setPerspectiva(1.5708, 1.333, 0, 100);
+    // camara.setPerspectiva(1.5708, 1.0, 1.0, 100)
   	return camara;
   }
   crearCamaraCompleto(nombre){
     let rota = this.crearNodo("RotaCam", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaCam", rota, this.crearTransform());
     let cam = this.crearCamara(nombre, trasla);
-    rota.entidad.rotar(0.785398, 1, 0, 0);
-    trasla.entidad.trasladar(0,0,0);
+    rota.entidad.rotar(0.785398, 0, 0, 1);
+    // rota.entidad.rotar(3.141588943012, 0, 1, 0);
+    // rota.entidad.rotar(0.785398, 1, 0, 0);
+    trasla.entidad.trasladar(0,-20,0);
     GViewMatrix = trasla.entidad.modelMatrix;
     GProjectionMatrix = cam.getProjectionMatrix();
     return cam;
@@ -81,7 +83,7 @@ class TFachadaMotor {
     let rota = this.crearNodo("RotaLuz", this.escena, this.crearTransform());
     let trasla = this.crearNodo("TraslaLuz", rota, this.crearTransform());
     let luz = this.crearLuz(nombre, trasla);
-    // trasla.entidad.trasladar(0,10,0);
+    trasla.entidad.trasladar(0,5,2);
     GPositionLuz = trasla.entidad.modelMatrix;
     return luz;
   }
@@ -119,11 +121,13 @@ class TFachadaMotor {
     return entMalla;
   }
   crearMallaCompleto(nombre, ficheroMalla, ficheroMaterial, ficheroTextura){
-    let rota = this.crearNodo("RotaMalla", this.escena, this.crearTransform());
+    let escala = this.crearNodo("EscalaMalla", this.escena, this.crearTransform());
+    let rota = this.crearNodo("RotaMalla", escala, this.crearTransform());
     let trasla = this.crearNodo("TraslaMalla", rota, this.crearTransform());
     let malla = this.crearMalla(nombre, ficheroMalla, ficheroMaterial,ficheroTextura, trasla);
-    // trasla.entidad.trasladar(-1,0,0);
-    // rota.entidad.rotar(0.785398, 0, 1, 0);
+    trasla.entidad.escalar(0.03,0.03,0.03);
+    // trasla.entidad.trasladar(0,-20,0);
+    // rota.entidad.rotar(1.41372, 0, 1, 0);
 
     //Guaro las matrices de forma global para obtenerlas en el shader
     //GlobalMalla = malla;
@@ -134,9 +138,8 @@ class TFachadaMotor {
     GDifuso = malla.material.colorDifuso;
     GAmbiental = malla.material.colorAmbiente;
     GEspecular = malla.material.colorEpecular;
-    GFragColor = malla.material.frag_color;
     GBrillo = malla.material.iluminacion;
-    GIntensidadLuz = malla.material.vertexColor;
+    GIntensidadLuz = malla.material.intensidad;
     return null;
   }
 
