@@ -58,11 +58,12 @@ class TRecursoMalla extends TRecurso{
       let indices = json.model.meshes[0].vertElement.vertIndices;
       this.indices = indices;
     }
-  }
-
-  draw(){
     GVertices = this.vertices;
     GIndices = this.indices;
     GNormales = this.normales;
+  }
+
+  draw(){
+
   }
 }

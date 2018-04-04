@@ -26,7 +26,7 @@ class TTransformacion extends TEntidad{
     mat4.invert(this.transfMatrix, this.transfMatrix);
   }
 
-  trasladar( tx, ty, tz){
+  trasladar(tx, ty, tz){
     let v = vec3.fromValues(tx, ty, tz);
     mat4.translate(this.transfMatrix, this.transfMatrix, v);
   }

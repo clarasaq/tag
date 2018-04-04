@@ -6,27 +6,7 @@ class TShader extends TRecurso {
     this.shaderProgram;
   }
 
-  initWebGL(canvas) {
-    var gl = null;
-
-    try {
-      // Tratar de tomar el contexto estandar. Si falla, retornar al experimental.
-      gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-    }
-    catch(e) {}
-
-    // Si no tenemos ningun contexto GL, date por vencido ahora
-    if (!gl) {
-      alert("Imposible inicializar WebGL. Tu navegador puede no soportarlo.");
-      gl = null;
-    }
-
-    return gl;
-  }
-
   cargarFichero(nombre){
-    var canvas = document.getElementById('canvas');
-    var gl = this.initWebGL(canvas);
     let req = new XMLHttpRequest();
     let aux = nombre.split('.');
     let ext = aux[aux.length-1];
@@ -46,13 +26,44 @@ class TShader extends TRecurso {
     }
   }
 
+  initWebGL(canvas) {
+    var gl = null;
+
+    try {
+      // Tratar de tomar el contexto estandar. Si falla, retornar al experimental.
+      gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    }
+    catch(e) {}
+
+    // Si no tenemos ningun contexto GL, date por vencido ahora
+    if (!gl) {
+      alert("Imposible inicializar WebGL. Tu navegador puede no soportarlo.");
+      gl = null;
+    }
+
+    return gl;
+    let shader = fachada.crearShader('fragShader.frag', 'vertShader.vert');
+
+    fachada.draw();
+    shader.loadShaders();
+  }
+
   loadShaders(){
     let vertices = GVertices;
     let indices = GIndices;
     let normales = GNormales;
-
     var canvas = document.getElementById('canvas');
-    var gl = this.initWebGL(canvas);
+    let gl = this.initWebGL(canvas);
+    //Compilo los dos shaders
+
+    //Vertex Shader
+    // console.log(this.VertexShader);
+    var vertShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertShader, this.VertexShader);
+    // console.log(this.VertexShader);
+    gl.compileShader(vertShader);
+
+    var error = gl.getShaderInfoLog(vertShader);
     //Compilo los dos shaders
 
     //Vertex Shader
@@ -85,7 +96,6 @@ class TShader extends TRecurso {
     gl.linkProgram(programa);
 
     //Creo los buffers
-
     var vertex_buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
