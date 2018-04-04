@@ -24,6 +24,7 @@ class TFachadaMotor {
     let trans = new TTransformacion();
     return trans;
   }
+
   rotar(nodo, rad, axis1, axis2, axis3){
     let nodoRota = nodo.getPadre().getPadre();
     nodoRota.entidad.rotar(rad, axis1, axis2, axis3);
@@ -55,6 +56,7 @@ class TFachadaMotor {
     GProjectionMatrix = cam.getProjectionMatrix();
     return cam;
   }
+
   borrarCamaraCompleto(){
     for(let i=0; i<this.regCamaras.length; i++){
       this.escena.removeHijo(this.regCamaras[i].getPadre().getPadre());
@@ -78,6 +80,7 @@ class TFachadaMotor {
     GPositionLuz = trasla.entidad.modelMatrix;
     return luz;
   }
+
   borrarLuzCompleto(){
     for(let i=0; i<this.regLuces.length; i++){
       this.escena.removeHijo(this.regLuces[i].getPadre().getPadre());
@@ -131,6 +134,7 @@ class TFachadaMotor {
   getLuces(){
     return this.regLuces;
   }
+
   draw(){
     this.escena.draw();
   }
